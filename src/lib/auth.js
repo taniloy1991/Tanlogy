@@ -41,6 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
             userProfiles.forEach(profile => {
                 profile.classList.remove('hidden');
                 profile.classList.add('flex');
+                
+                // Add Admin link if email matches
+                if (user.email === 'taniloy334@gmail.com') {
+                    // Prevent duplicate injections
+                    if (!profile.querySelector('.admin-link')) {
+                        const dropdown = profile.querySelector('.absolute');
+                        const adminBtn = document.createElement('a');
+                        adminBtn.href = '/admin.html';
+                        adminBtn.className = 'admin-link block w-full text-left px-4 py-3 text-sm font-bold text-primary hover:bg-primary-container/20 transition-colors flex items-center gap-2 justify-end border-b border-outline-variant/20';
+                        adminBtn.innerHTML = `
+                            অ্যাডমিন প্যানেল
+                            <span class="material-symbols-outlined text-[18px]">admin_panel_settings</span>
+                        `;
+                        // Insert before the logout button
+                        dropdown.insertBefore(adminBtn, dropdown.querySelector('#auth-logout-btn'));
+                    }
+                }
             });
             
             // Set User Info

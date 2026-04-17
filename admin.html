@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tanlogy - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#006c49",
+                        "primary-container": "#10b981",
+                        "on-primary": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "on-surface-variant": "#3c4a42",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6"
+                    },
+                    fontFamily: {
+                        headline: ["Noto Serif", "sans-serif"],
+                        body: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen flex overflow-hidden">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex">
+        <div class="h-16 flex items-center px-6 border-b border-gray-200">
+            <span class="font-headline font-black text-2xl text-primary">Tanlogy<span class="text-xs ml-1 text-on-surface-variant">Admin</span></span>
+        </div>
+        <nav class="flex-1 p-4 space-y-1">
+            <a href="#" class="flex items-center gap-3 bg-primary/10 text-primary px-4 py-3 rounded-lg font-bold">
+                <span class="material-symbols-outlined">dashboard</span>
+                এনরোলমেন্টস (Enrollments)
+            </a>
+            <a href="index.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-gray-100 px-4 py-3 rounded-lg font-medium transition-colors mt-8">
+                <span class="material-symbols-outlined">open_in_new</span>
+                ওয়েবসাইটে যান
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+        <!-- Topbar -->
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">
+            <div class="font-headline font-bold text-xl md:hidden text-primary">Tanlogy Admin</div>
+            <h1 class="text-lg font-bold text-on-surface hidden md:block">ড্যাশবোর্ড ওভারভিউ</h1>
+            <div class="flex items-center gap-3" id="auth-container">
+                <button id="auth-logout-btn" class="text-sm font-bold text-error flex items-center gap-1 hover:opacity-80">
+                    লগ আউট <span class="material-symbols-outlined text-[18px]">logout</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="flex-1 overflow-auto p-6 bg-gray-50">
+            
+            <!-- Page Header -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-on-surface mb-2 font-headline">রিসেন্ট এনরোলমেন্টস (Recent Enrollments)</h2>
+                <p class="text-on-surface-variant">এখানে স্টুডেন্টদের কোর্সে ভর্তির রিকুয়েস্টগুলো দেখতে ও ম্যানেজ করতে পারবেন।</p>
+            </div>
+
+            <!-- Table Container -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm whitespace-nowrap">
+                        <thead class="bg-gray-100 text-on-surface-variant font-bold border-b border-gray-200 uppercase text-xs tracking-wider">
+                            <tr>
+                                <th class="px-6 py-4">স্টুডেন্ট নাম</th>
+                                <th class="px-6 py-4">ইমেইল / ফোন</th>
+                                <th class="px-6 py-4">কোর্স</th>
+                                <th class="px-6 py-4">সোর্স ট্রানজ্যাকশন আইডি</th>
+                                <th class="px-6 py-4">স্ট্যাটাস</th>
+                                <th class="px-6 py-4 text-right">অ্যাকশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="enrollments-table-body" class="divide-y divide-gray-100">
+                            <!-- Rows will be injected here by admin.js -->
+                            <tr>
+                                <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                    <span class="material-symbols-outlined animate-spin text-3xl">hourglass_empty</span>
+                                    <p class="mt-2">ডাটা লোড হচ্ছে...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/lib/auth.js"></script>
+    <script type="module" src="/src/admin.js"></script>
+</body>
+</html>
