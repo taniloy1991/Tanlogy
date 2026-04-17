@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tanlogy - আধুনিক এআই এবং YouTube Automation Courses</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#466550",
+                    "on-primary-fixed": "#002113",
+                    "primary-container": "#10b981",
+                    "secondary-container": "#bbeece",
+                    "on-secondary-fixed": "#002112",
+                    "on-primary-fixed-variant": "#005236",
+                    "tertiary-fixed-dim": "#adcfb5",
+                    "on-secondary-fixed-variant": "#204f38",
+                    "on-tertiary-container": "#213f2d",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed-dim": "#a0d2b3",
+                    "background": "#f7f9fb",
+                    "on-surface": "#191c1e",
+                    "on-background": "#191c1e",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "secondary": "#39684f",
+                    "on-tertiary-fixed-variant": "#2f4d3a",
+                    "secondary-fixed": "#bbeece",
+                    "on-secondary-container": "#3f6e54",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "primary": "#006c49",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#c8ebd0",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#d8dadc",
+                    "inverse-surface": "#2d3133",
+                    "surface-tint": "#006c49",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#6c7a71",
+                    "outline-variant": "#bbcabf",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f6",
+                    "on-surface-variant": "#3c4a42",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary-container": "#00422b",
+                    "primary-fixed-dim": "#4edea3",
+                    "primary-fixed": "#6ffbbe",
+                    "inverse-primary": "#4edea3",
+                    "on-tertiary-fixed": "#022110",
+                    "surface": "#f7f9fb",
+                    "tertiary-container": "#8aab93",
+                    "surface-container-highest": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .button-settle:active {
+            transform: scale(0.98);
+        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<a href="index.html" class="flex items-center">
+    <img src="/logo.png" alt="Tanlogy Logo" class="h-14 w-auto drop-shadow-sm" />
+</a>
+<!-- Desktop Navigation -->
+<div class="hidden md:flex items-center space-gap-8 gap-x-8">
+<a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">AI Automation</a>
+<a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">YouTube Automation</a>
+<a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">কোর্সসমূহ</a>
+<a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">আমাদের সম্পর্কে</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block px-5 py-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:opacity-80 transition-opacity">লগইন</button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-xl font-semibold shadow-lg button-settle transition-all">সাইন আপ</button>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-6 py-20 md:py-32 max-w-7xl mx-auto overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="z-10">
+<span class="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider uppercase bg-secondary-container text-on-secondary-container rounded-full">আপনার ক্যারিয়ারকে সুরক্ষিত করুন ভবিষ্যতের জন্য</span>
+<h1 class="text-5xl md:text-7xl font-black text-on-surface leading-tight mb-8">
+                        <span class="text-primary italic">ডিজিটাল লিভারেজের</span> কলাকৌশল আয়ত্ত করুন
+</h1>
+<p class="text-xl text-on-surface-variant leading-relaxed mb-10 max-w-xl">
+                        বাংলাদেশের ক্রিয়েটিভ এবং টেক কমিউনিটির জন্য তৈরি এক্সপার্ট-লেড কোর্স। এআই এজেন্ট এবং ফেসলেস ইউটিউব চ্যানেলের মাধ্যমে বৈশ্বিক সুযোগ উন্মোচন করুন।
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="#courses" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-bold text-lg shadow-xl button-settle flex items-center justify-center gap-2 w-fit">
+                            কোর্সগুলো এক্সপ্লোর করুন <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+<button class="bg-surface-container-high text-primary px-8 py-4 rounded-xl font-bold text-lg button-settle flex items-center justify-center gap-2">
+                            সাকসেস স্টোরিগুলো দেখুন
+                        </button>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -top-20 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-20 -left-10 w-60 h-60 bg-primary-container/20 rounded-full blur-3xl"></div>
+<div class="rounded-3xl overflow-hidden shadow-2xl relative z-10 aspect-square transform rotate-2 hover:rotate-0 transition-transform duration-700">
+<img alt="Professional workstation with modern tech" class="w-full h-full object-cover" data-alt="Cinematic shot of a modern workspace with multiple monitors displaying AI code and video editing software, warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4JH_ver9ptFSw68kzmMS1CodJYn7hTf7bSFD8zur75n-jqgn4WkPT5a3SnPqIOst3JCjIPY7nngLT2XKMqigVWJYNJHb97fM6xjdWrGPrJwYgIil6g1CQXVtefXUAi6VrAg8_hq2A9G7Fm2UeXX8F0IhCJbrWrfC9RN3WZw6OSvRPhJhXjiMl_2JNkbizLzYEVbcVFvVpTE3Nr2NmgNwJaCbevfVqk7L8-tRGtIys2RsT2zlgoZgXCCkRDNvxgFhiWwobi5VlwFW2"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Course Cards Section -->
+<section id="courses" class="bg-surface-container-low py-24 px-6">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="text-4xl md:text-5xl font-bold text-on-surface mb-6 font-headline">আমাদের ফ্ল্যাগশিপ প্রোগ্রামসমূহ</h2>
+<p class="text-lg text-on-surface-variant max-w-2xl mx-auto">ইন্ডাস্ট্রি প্রফেশনালদের দ্বারা তৈরি ইনটেনসিভ কারিকুলাম, যারা বাস্তবে এই সিস্টেমগুলো তৈরি করে সফল হয়েছেন।</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full group relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+    <div class="mb-6 flex-grow relative z-10">
+        <h3 class="text-2xl font-bold mb-3 font-headline text-on-surface">YouTube Automation Mastery</h3>
+        <p class="text-on-surface-variant text-sm italic mb-8 border-l-2 border-primary pl-3">নিজে ক্যামেরায় না এসেও গ্লোবাল ইউটিউব নিস-এর মাধ্যমে আপনার ক্যারিয়ার ও ইনকাম সিকিউর করুন।</p>
+        <ul class="space-y-4 mb-8">
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>টেলিগ্রাম প্রাইভেট গ্রুপ সাপোর্ট</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>লাইফটাইম এক্সেস ও ফিউচার আপডেট</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>উচ্চ-আয়ের গ্লোবাল সিপিএম মার্কেট হ্যাকস</span>
+            </li>
+        </ul>
+    </div>
+    <a href="checkout.html" class="w-full py-4 bg-primary text-on-primary rounded-xl font-bold text-center button-settle hover:bg-on-primary-fixed hover:text-white transition-colors relative z-10">Enroll Now</a>
+</div>
+
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full group relative overflow-hidden ring-2 ring-primary/20">
+    <div class="absolute top-4 right-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest z-10">Popular</div>
+    <div class="absolute top-0 right-0 w-24 h-24 bg-primary-container/10 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+    <div class="mb-6 flex-grow relative z-10">
+        <h3 class="text-2xl font-bold mb-3 font-headline text-on-surface">AI Business Automation</h3>
+        <p class="text-on-surface-variant text-sm italic mb-8 border-l-2 border-primary-container pl-3">এআই এজেন্ট এবং কাস্টম সিস্টেমের মাধ্যমে ব্যবসার কাজ অর্ধেক করে প্রোডাক্টিভিটি বাড়ান।</p>
+        <ul class="space-y-4 mb-8">
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary-container text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>সরাসরি এক্সপার্ট মেন্টরশিপ সেশন</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary-container text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>লাইফটাইম এক্সেস ও ফিউচার আপডেট</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary-container text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>রিয়েল লাইফ এআই ক্লায়েন্ট প্রজেক্টস</span>
+            </li>
+        </ul>
+    </div>
+    <a href="checkout.html" class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-bold text-center button-settle hover:opacity-90 transition-opacity relative z-10 shadow-md">Enroll Now</a>
+</div>
+
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full group relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary-container/20 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+    <div class="mb-6 flex-grow relative z-10">
+        <h3 class="text-2xl font-bold mb-3 font-headline text-on-surface">Upwork Lead Generation</h3>
+        <p class="text-on-surface-variant text-sm italic mb-8 border-l-2 border-secondary pl-3">সঠিক ক্লায়েন্ট কীভাবে খুঁজে পেতে হয় তা শিখুন এবং ঘরে বসেই ফ্রিল্যান্স ক্যারিয়ার গড়ুন।</p>
+        <ul class="space-y-4 mb-8">
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-secondary text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>টেলিগ্রাম প্রাইভেট সাপোর্ট গ্রুপ</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-secondary text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>লাইফটাইম এক্সেস ও ফিউচার আপডেট</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-secondary text-xl mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span>আপওয়ার্ক প্রোফাইল এবং পোর্টফোলিও রিভিউ</span>
+            </li>
+        </ul>
+    </div>
+    <a href="checkout.html" class="w-full py-4 bg-surface-container-high text-on-surface rounded-xl font-bold text-center button-settle hover:bg-secondary hover:text-white transition-colors relative z-10">Enroll Now</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Curriculum Accordion -->
+<section class="py-24 px-6 max-w-5xl mx-auto">
+    <div class="text-center mb-16">
+        <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-primary bg-primary/10 rounded-full uppercase">সিলেবাস</span>
+        <h2 class="text-4xl md:text-5xl font-bold font-headline text-on-surface">কোর্স কারিকুলাম</h2>
+    </div>
+    
+    <!-- Tab Controls -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <button onclick="switchTab('ai')" id="tab-ai" class="flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-primary text-white shadow-lg button-settle">AI Automation Mastery</button>
+        <button onclick="switchTab('yt')" id="tab-yt" class="flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest button-settle">YouTube Automation</button>
+    </div>
+
+    <!-- AI Automation Curriculum -->
+    <div id="curriculum-ai" class="space-y-4">
+        <!-- Module 1 -->
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden" open>
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <div class="flex items-center gap-4">
+                    <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">১</span>
+                    <span>এআই মাইন্ডসেট ও বেসিক্স</span>
+                </div>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                <p class="mb-3 text-sm italic text-primary-fixed-variant">উদ্দেশ্য: মানুষের কাজকে এআই দিয়ে সহজ করা এবং উৎপাদনশীলতা বাড়ানো।</p>
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>এআই কেন আপনার শত্রু নয়, বরং সবচেয়ে দক্ষ সহকারী।</li>
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>প্রম্পট ইঞ্জিনিয়ারিংয়ের গোপন সূত্র (The Art of Talking to AI)।</li>
+                </ul>
+            </div>
+        </details>
+        <!-- Module 2 -->
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <div class="flex items-center gap-4">
+                    <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">২</span>
+                    <span>কন্টেন্ট ও মার্কেটিং অটোমেশন</span>
+                </div>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>এক মাসে ১ বছরের কন্টেন্ট ক্যালেন্ডার তৈরির কৌশল।</li>
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>চ্যাটজিপিটি এবং ক্যানভা ব্যবহার করে বাল্ক কন্টেন্ট ডিজাইন।</li>
+                </ul>
+            </div>
+        </details>
+        <!-- Module 3 -->
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <div class="flex items-center gap-4">
+                    <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">৩</span>
+                    <span>বিজনেস প্রসেস অটোমেশন (n8n & Zapier)</span>
+                </div>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>অটোমেটেড ইমেইল এবং কাস্টমার সাপোর্ট সিস্টেম তৈরি।</li>
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>ডাটা এন্ট্রি এবং রিপিটেটিভ কাজগুলো রোবটকে দিয়ে করানো।</li>
+                </ul>
+            </div>
+        </details>
+        <!-- Module 4 -->
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <div class="flex items-center gap-4">
+                    <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">৪</span>
+                    <span>নিজের কাস্টম এআই এজেন্ট তৈরি</span>
+                </div>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>কোডিং ছাড়াই নিজের বিজনেসের জন্য স্পেশালাইজড এআই তৈরি।</li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <!-- YouTube Automation Curriculum -->
+    <div id="curriculum-yt" class="space-y-4 hidden">
+        <!-- Module 1 -->
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden" open>
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <div class="flex items-center gap-4">
+                    <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">১</span>
+                    <span>নিস সিলেকশন ও মার্কেট রিসার্চ</span>
+                </div>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                <p class="mb-3 text-sm italic text-primary-fixed-variant">উদ্দেশ্য: ফেসলেস চ্যানেল তৈরি করে প্যাসিভ ইনকাম নিশ্চিত করা।</p>
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>২০২৬ সালে কোন ক্যাটাগরির চ্যানেলে ইনকাম বেশি?</li>
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>প্রতিযোগী এনালাইসিস এবং গ্যাপ খুঁজে বের করা।</li>
+                </ul>
+            </div>
+        </details>
+        <!-- Module 2 -->
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <div class="flex items-center gap-4">
+                    <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">২</span>
+                    <span>ভাইরাল স্ক্রিপ্ট রাইটিং ও স্টোরিটেলিং</span>
+                </div>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>প্রথম ৩০ সেকেন্ডের 'হুক' তৈরির সিক্রেট।</li>
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>ট্যানলজি স্টাইলে এআই দিয়ে হিউম্যান-লাইক স্ক্রিপ্ট লেখা।</li>
+                </ul>
+            </div>
+        </details>
+        <!-- Module 3 -->
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <div class="flex items-center gap-4">
+                    <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">৩</span>
+                    <span>ফেসলেস ভিডিও প্রোডাকশন</span>
+                </div>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>স্টক ফুটেজ এবং এআই ভয়েসওভারের সঠিক ব্যবহার।</li>
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>কপিরাইট ফ্রি কন্টেন্ট সোর্সিং ও এডিটিং হ্যাকস।</li>
+                </ul>
+            </div>
+        </details>
+        <!-- Module 4 -->
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <div class="flex items-center gap-4">
+                    <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">৪</span>
+                    <span>গ্রোথ এবং মনিটাইজেশন</span>
+                </div>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>১০০০ সাবস্ক্রাইবারের আগে ইনকাম করার ৩টি উপায়।</li>
+                    <li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>অ্যালগরিদম হ্যাকিং: থাম্বনেইল এবং মেটাডাটা অপ্টিমাইজেশন।</li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            const btnAi = document.getElementById('tab-ai');
+            const btnYt = document.getElementById('tab-yt');
+            const contentAi = document.getElementById('curriculum-ai');
+            const contentYt = document.getElementById('curriculum-yt');
+            
+            if (tab === 'ai') {
+                contentAi.classList.remove('hidden');
+                contentYt.classList.add('hidden');
+                btnAi.className = "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-primary text-white shadow-lg button-settle";
+                btnYt.className = "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest button-settle";
+            } else {
+                contentYt.classList.remove('hidden');
+                contentAi.classList.add('hidden');
+                btnYt.className = "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-primary text-white shadow-lg button-settle";
+                btnAi.className = "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest button-settle";
+            }
+        }
+    </script>
+</section>
+
+<!-- The Tanlogy Experience -->
+<section class="py-24 px-6 bg-surface border-y border-outline-variant/10">
+<div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+            <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-primary bg-primary/10 rounded-full uppercase">কেন আমরা আলাদা?</span>
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 font-headline text-on-surface">The <span class="text-primary italic">Tanlogy</span> Experience</h2>
+            <p class="text-lg text-on-surface-variant leading-relaxed text-balance">
+                দেখুন, আমরা এখানে শুধু কয়েকটা ভিডিও রেকর্ড করে কোর্স বিক্রি করতে আসিনি। আমাদের লক্ষ্য হলো এমন একটা শক্তিশালী স্কিলড কমিউনিটি তৈরি করা, যেখানে আমরা সবাই একসাথে গ্রো করবো। এখানকার মডিউলগুলো গতানুগতিক কোনো থিওরির উপর তৈরি না—একেবারে রিয়েল-লাইফ এক্সপেরিয়েন্স থেকে তৈরি। যখন আপনি কোনো প্রজেক্টে বা কাজে আটকে যাবেন, আপনি একা নন; আপনার সাথে পুরো কমিউনিটি এবং এক্সপার্টরা আছেন সাপোর্ট দেওয়ার জন্য।
+            </p>
+        </div>
+        <div class="space-y-6 bg-white p-8 md:p-10 rounded-3xl shadow-[0_20px_50px_rgb(0,0,0,0.03)] border border-outline-variant/20 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-5">
+                <span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+            </div>
+            
+            <div class="flex items-start gap-5 relative z-10">
+                <div class="w-14 h-14 bg-primary-container/20 text-primary-fixed-variant rounded-2xl flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-2 text-on-surface">Human-centric learning</h4>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">রোবোটিক ভাষায় নয়, মানুষের সাইকোলজি বুঝে খুব সহজ এবং সাবলীল বাংলা ভাষায় শেখানোর পদ্ধতি।</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-5 relative z-10">
+                <div class="w-14 h-14 bg-secondary-container/20 text-secondary border border-secondary/10 rounded-2xl flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">forum</span>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-2 text-on-surface">Direct Mentorship</h4>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">আপনার কাজ আটকে গেলে সরাসরি এক্সপার্টদের কাছ থেকে গাইডেন্স এবং ফিডব্যাক পাওয়ার সুযোগ।</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-5 relative z-10">
+                <div class="w-14 h-14 bg-tertiary-container/20 text-on-tertiary-container rounded-2xl flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">build</span>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-2 text-on-surface">Practical Projects</h4>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">লাইভ রিয়েল-লাইফ প্রজেক্টের মাধ্যমে হাতেনাতে শেখার সুবিধা, যা সরাসরি আপনার পোর্টফোলিও ভারী করবে।</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- Why Choose Us - Bento Grid -->
+<section class="py-32 px-6 max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-5xl font-bold mb-6">সাফল্যের জন্য ডিজাইন করা</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">আমরা শুধু থিওরি শেখাই না; আমরা ডিজিটাল স্বাধীনতার ব্লুপ্রিন্ট প্রদান করি।</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+<div class="md:col-span-2 bg-surface-container-high rounded-xl p-10 flex flex-col justify-end relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-[160px]">school</span>
+</div>
+<div class="z-10">
+<h4 class="text-2xl font-bold mb-4">লোকালাইজড মেন্টরশিপ</h4>
+<p class="text-on-surface-variant leading-relaxed">বাংলায় সাপ্তাহিক লাইভ সেশন, যেখানে আমরা স্থানীয় মার্কেট অনুযায়ী শিক্ষার্থীদের বাস্তব সমস্যাগুলোর সমাধান করি।</p>
+</div>
+</div>
+<div class="bg-primary text-on-primary rounded-xl p-10 flex flex-col justify-between">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">groups</span>
+<div>
+<h4 class="text-2xl font-bold mb-4">এলিট কমিউনিটি</h4>
+<p class="text-on-primary/80 leading-relaxed">বাংলাদেশের সফল উদ্যোক্তাদের সাথে আমাদের প্রাইভেট ডিসকর্ড সার্ভারে লাইফটাইম এক্সেস।</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-10 flex flex-col justify-between border border-outline-variant/10">
+<span class="material-symbols-outlined text-4xl text-primary">inventory_2</span>
+<div>
+<h4 class="text-2xl font-bold mb-4">রিসোর্স ভল্ট</h4>
+<p class="text-on-surface-variant leading-relaxed">৳২০,০০০ এরও বেশি মূল্যের টেমপ্লেট, স্ক্রিপ্ট এবং সফটওয়্যার ডিসকাউন্ট।</p>
+</div>
+</div>
+<div class="md:col-span-2 bg-secondary-container/20 rounded-xl p-10 flex flex-col md:flex-row items-center gap-10">
+<div class="flex-1">
+<h4 class="text-2xl font-bold mb-4">প্রজেক্ট-ভিত্তিক শেখা</h4>
+<p class="text-on-surface-variant leading-relaxed">একটি লাইভ অটোমেশন এজেন্ট অথবা মনিটাইজেশনের জন্য প্রস্তুত লঞ্চ করা চ্যানেলের সাথে গ্র্যাজুয়েট হোন।</p>
+</div>
+<div class="w-full md:w-1/3 bg-white p-4 rounded-xl shadow-sm rotate-3">
+<div class="h-2 w-2/3 bg-primary-container rounded-full mb-3"></div>
+<div class="h-2 w-full bg-surface-container rounded-full mb-3"></div>
+<div class="h-2 w-1/2 bg-surface-container rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Slider -->
+<section class="bg-surface py-24 px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl font-bold mb-16 text-center font-headline text-on-surface">বাংলাদেশের শিক্ষার্থীদের মতামত</h2>
+        
+        <div class="flex gap-6 overflow-x-auto snap-x snap-mandatory pt-4 pb-12 hide-scrollbar">
+            <!-- Testimonial 1 -->
+            <div class="min-w-[85vw] md:min-w-[400px] snap-center bg-surface-container-lowest p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-outline-variant/10 shrink-0 flex flex-col hide-scrollbar">
+                <div class="flex gap-1 text-amber-500 mb-6">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="text-on-surface-variant mb-8 text-lg font-medium leading-relaxed italic">"Tanlogy-র এআই অটোমেশন কোর্সটি আমার প্রতিদিনের ৩ ঘণ্টার কাজকে ৩০ মিনিটে নামিয়ে এনেছে। অসাধারণ!"</p>
+                <div class="flex items-center gap-4 mt-auto">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shadow-inner">
+                        <img alt="আসিফ হোসেন" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4iYUYSub4MqM6nBdBzccTXLoU3W7YGa3Pqq3BvpJucFvBKISe18JhYzfSGmNP8rgI5BkzS2VniEwc_CjMmaD2-5LRK6T5GvqzHGKUZs2lGEzu3jsexWm9SVisfpQTV3EtlSyRXhLqxAV5oaxG1GZjluWZdBcZJInZ_zqijDQnBq5rql5ByCJ5wB75ifDtjUsHAsiJUGna7XLG4NUXBN9Nx7yzZG4uLmm1I1z-V-mHdUWaO-Co68QPg0PhP9FQB8tZ3Ld8EoftGGCU"/>
+                    </div>
+                    <div>
+                        <p class="font-bold text-on-surface">আসিফ হোসেন</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="min-w-[85vw] md:min-w-[400px] snap-center bg-surface-container-lowest p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-outline-variant/10 shrink-0 flex flex-col hide-scrollbar">
+                <div class="flex gap-1 text-amber-500 mb-6">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="text-on-surface-variant mb-8 text-lg font-medium leading-relaxed italic">"ইউটিউব নিয়ে অনেক দ্বিধায় ছিলাম, কিন্তু এখানকার স্টোরিটেলিং গাইডলাইন আমার চ্যানেলের ভিউ এক মাসে দ্বিগুণ করে দিয়েছে।"</p>
+                <div class="flex items-center gap-4 mt-auto">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shadow-inner">
+                        <img alt="কুহিনুর বেগম" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7UiQ75TVhFCbVo2nknxvK-PeXu0AGB0MiA7fDyHT0bpKFhMdNYnl10aza1GJRfMuWS1-7raKp6aMYsbNnuq7oDMu7CIF0wtszgttTj2-2ghfM8pgitWito8gT3W53BGTx_QPwHTLachDHLAJjUV45q3wz9Y_yr1RXPSqpqpfHaxx41VseJFOJhEqMv0UjL8N_Nj8TrKwXnVu0GC2AtbOWawxPfOElrqrmbb1xZgYFqaAX0t4Zulwh1NFJFJM2j_GeRTqGrwSsW4By"/>
+                    </div>
+                    <div>
+                        <p class="font-bold text-on-surface">কুহিনুর বেগম</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="min-w-[85vw] md:min-w-[400px] snap-center bg-surface-container-lowest p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-outline-variant/10 shrink-0 flex flex-col hide-scrollbar">
+                <div class="flex gap-1 text-amber-500 mb-6">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="text-on-surface-variant mb-8 text-lg font-medium leading-relaxed italic">"আমার ডিজিটাল ক্যারিয়ারের জন্য করা সেরা ইনভেস্টমেন্ট। শুধুমাত্র রিসোর্স ভল্টটিই ভর্তি ফি এর সমান মূল্যবান।"</p>
+                <div class="flex items-center gap-4 mt-auto">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shadow-inner">
+                        <img alt="আরিফুল হক" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxRDeM4miwYFMRnO2o_3CYU73O90oU1wymN4HY4G40uDP5YraTYeDUG0GRGNUO-23DWy0YmVbocyMTc_8GAtJLGjWuI4cThQxOtEh9QlYTvNIFXFnFd1V8FoWcp-zlvfJPtAIcHS4fV-2sHQ7nEHnJ0KT6JX243WoDW4Rx7n1S9vEkiPLMdL3DitnqBrr3DNoNb4BMkeptkzbzjYHJhoopB_aKTrPUKbPSdoNjNQr0aRl67EkL8evY5nA1JXUah50W05-T1p3gQ3-c"/>
+                    </div>
+                    <div>
+                        <p class="font-bold text-on-surface">আরিফুল হক</p>
+                        <p class="text-sm text-on-surface-variant">সফটওয়্যার ডেভেলপার, চট্টগ্রাম</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-24 px-6 max-w-4xl mx-auto">
+    <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold font-headline text-on-surface">সাধারণ জিজ্ঞাসা (FAQ)</h2>
+    </div>
+    <div class="space-y-4">
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden" open>
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <span>ক্লাস কি লাইভ হবে?</span>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant border-t border-outline-variant/10 mt-2 pt-4">
+                কোর্সগুলো প্রি-রেকর্ডেড হওয়ায় আপনি নিজের সুবিধামতো যেকোনো সময়ে দেখতে পারবেন। তবে স্টুডেন্টদের সাপোর্ট ও ফিডব্যাকের জন্য নিয়মিত লাইভ সেশনের আয়োজন করা হয়।
+            </div>
+        </details>
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <span>টেলিগ্রামে সাপোর্ট পাবো কি না?</span>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant border-t border-outline-variant/10 mt-2 pt-4">
+                হ্যাঁ, প্রতিটি কোর্সের জন্য আলাদা প্রাইভেট টেলিগ্রাম গ্রুপ রয়েছে। যেখানে আপনি এক্সপার্ট এবং অন্যান্য স্টুডেন্টদের থেকে ডিরেক্ট সাপোর্ট পাবেন।
+            </div>
+        </details>
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <span>কোর্সের মেয়াদ কতদিন?</span>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant border-t border-outline-variant/10 mt-2 pt-4">
+                একবার কোর্সে এনরোল করলে আপনি সকল ম্যাটেরিয়ালস এবং ফিউচার আপডেটে লাইফটাইম এক্সেস পাবেন।
+            </div>
+        </details>
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <span>আমি কি মোবাইল দিয়ে কোর্সটি করতে পারবো?</span>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant border-t border-outline-variant/10 mt-2 pt-4">
+                কোর্সের ভিডিও দেখা এবং শেখার জন্য মোবাইল ফোন যথেষ্ট। তবে প্রফেশনাল কাজ এবং অটোমেশন সেটআপ এর জন্য একটি ল্যাপটপ বা ডেস্কটপ থাকা বাঞ্ছনীয়।
+            </div>
+        </details>
+        <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                <span>রিফান্ড পলিসি আছে কি?</span>
+                <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant border-t border-outline-variant/10 mt-2 pt-4">
+                হ্যাঁ, আমাদের ৭ দিনের নো-কোয়েশ্চেন-আস্কড মানিব্যাক গ্যারান্টি রয়েছে যদি আপনি মনে করেন এই কোর্সটি আপনার জন্য উপযুক্ত নয়।
+            </div>
+        </details>
+    </div>
+</section>
+<!-- Final CTA Section -->
+<section class="py-24 px-6 relative overflow-hidden">
+<div class="max-w-5xl mx-auto bg-primary rounded-3xl p-12 md:p-20 text-center text-on-primary relative z-10">
+<div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none"></div>
+<h2 class="text-4xl md:text-6xl font-bold mb-8">ভবিষ্যৎ গড়তে আপনি কি প্রস্তুত?</h2>
+<p class="text-xl mb-12 opacity-90 max-w-2xl mx-auto">বাংলাদেশের ১২০০+ ছাত্রছাত্রীদের সাথে যোগ দিন যারা ইতিমধ্যে অটোমেশনের মাধ্যমে তাদের জীবন পরিবর্তন করছে।</p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center">
+<button class="bg-white text-primary px-10 py-5 rounded-xl font-bold text-xl shadow-2xl button-settle">আজই শেখা শুরু করুন</button>
+<button class="bg-primary-container text-on-primary-container px-10 py-5 rounded-xl font-bold text-xl shadow-2xl button-settle">উপদেষ্টার সাথে কথা বলুন</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Pre-Footer Newsletter & CTA -->
+<section class="bg-surface py-20 px-6 border-t border-outline-variant/10">
+    <div class="max-w-6xl mx-auto bg-primary-container/20 rounded-3xl p-10 md:p-16 border border-outline-variant/20 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+            <!-- Newsletter -->
+            <div class="space-y-6">
+                <span class="material-symbols-outlined text-4xl text-primary mb-2">mark_email_read</span>
+                <h3 class="text-3xl md:text-4xl font-bold text-on-surface font-headline">আমাদের নতুন টিপস পেতে যুক্ত থাকুন</h3>
+                <p class="text-on-surface-variant leading-relaxed">অটোমেশন এবং ক্যারিয়ার নিয়ে এক্সক্লুসিভ গাইডলাইন, অফার এবং টিপস সরাসরি আপনার ইনবক্সে পেতে সাবস্ক্রাইব করুন।</p>
+                <form class="flex flex-col sm:flex-row gap-3 w-full max-w-md pt-2">
+                    <input type="email" placeholder="আপনার ইমেইল এড্রেস" class="flex-1 bg-white border border-outline-variant/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" required>
+                    <button type="submit" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-on-primary-fixed hover:text-white transition-colors shadow-md button-settle whitespace-nowrap">যুক্ত হোন</button>
+                </form>
+            </div>
+            
+            <!-- WhatsApp CTA split style -->
+            <div class="flex flex-col items-start md:items-end md:text-right space-y-6 md:border-l border-outline-variant/20 md:pl-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-3 text-on-surface">কোনো প্রশ্ন আছে?</h3>
+                    <p class="text-on-surface-variant">কোর্স বা ক্যারিয়ার নিয়ে কনফিউজড? আমাদের এক্সপার্ট সাপোর্ট টিমের সাথে সরাসরি কথা বলুন।</p>
+                </div>
+                <a href="#" class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold text-lg hover:-translate-y-1 active:translate-y-0 transition-transform shadow-[0_10px_20px_rgba(37,211,102,0.3)] w-full sm:w-auto">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#0f172a] text-slate-300 w-full pt-16 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 max-w-7xl mx-auto border-b border-slate-800 pb-12">
+        <div class="col-span-1 md:col-span-2 space-y-4">
+            <div class="font-serif text-3xl font-black text-white mb-2">Tanlogy</div>
+            <p class="text-sm leading-relaxed opacity-80 max-w-sm">অত্যাধুনিক স্বয়ংক্রিয় শিক্ষার মাধ্যমে বাংলাদেশের পরবর্তী প্রজন্মের ডিজিটাল উদ্যোক্তাদের ক্ষমতায়ন করা।</p>
+            <div class="flex space-x-5 pt-4">
+                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">facebook</span></a>
+                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">smart_display</span></a>
+                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">work</span></a>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <h5 class="font-bold text-white mb-2">কোম্পানি</h5>
+            <ul class="space-y-3 text-sm opacity-80">
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">আমাদের সম্পর্কে</a></li>
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">কোর্সসমূহ</a></li>
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">সাকসেস স্টোরি</a></li>
+            </ul>
+        </div>
+        <div class="space-y-4">
+            <h5 class="font-bold text-white mb-2">লিগ্যাল ও সাপোর্ট</h5>
+            <ul class="space-y-3 text-sm opacity-80">
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">Privacy Policy</a></li>
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">Terms of Service</a></li>
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">যোগাযোগ করুন</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pt-8 text-center text-sm opacity-60 px-6">
+        <p>© 2024 Tanlogy. All rights reserved. Built for the future of Bangladesh.</p>
+    </div>
+</footer>
+</body></html>

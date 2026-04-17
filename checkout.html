@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>চেকআউট | Tanlogy</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#466550",
+                        "on-primary-fixed": "#002113",
+                        "primary-container": "#10b981",
+                        "secondary-container": "#bbeece",
+                        "on-secondary-fixed": "#002112",
+                        "on-primary-fixed-variant": "#005236",
+                        "tertiary-fixed-dim": "#adcfb5",
+                        "on-secondary-fixed-variant": "#204f38",
+                        "on-tertiary-container": "#213f2d",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed-dim": "#a0d2b3",
+                        "background": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "on-background": "#191c1e",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary": "#39684f",
+                        "on-tertiary-fixed-variant": "#2f4d3a",
+                        "secondary-fixed": "#bbeece",
+                        "on-secondary-container": "#3f6e54",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "primary": "#006c49",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#c8ebd0",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "inverse-surface": "#2d3133",
+                        "surface-tint": "#006c49",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6c7a71",
+                        "outline-variant": "#bbcabf",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface-variant": "#3c4a42",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-container": "#00422b",
+                        "primary-fixed-dim": "#4edea3",
+                        "primary-fixed": "#6ffbbe",
+                        "inverse-primary": "#4edea3",
+                        "on-tertiary-fixed": "#022110",
+                        "surface": "#f7f9fb",
+                        "tertiary-container": "#8aab93",
+                        "surface-container-highest": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ghost-border {
+            border: 1px solid rgba(187, 202, 191, 0.15);
+        }
+        .academic-shadow {
+            box-shadow: 0 32px 48px -4px rgba(25, 28, 30, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<a href="index.html" class="flex items-center">
+    <img src="/logo.png" alt="Tanlogy Logo" class="h-14 w-auto drop-shadow-sm" />
+</a>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity font-serif text-lg tracking-tight font-bold" href="#">AI Automation</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity font-serif text-lg tracking-tight font-bold" href="#">YouTube Automation</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity font-serif text-lg tracking-tight font-bold" href="#">কোর্সসমূহ</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity font-serif text-lg tracking-tight font-bold" href="#">আমাদের সম্পর্কে</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-emerald-700 dark:text-emerald-400 font-serif text-lg tracking-tight font-bold px-4 py-2 hover:opacity-80 transition-opacity">লগইন</button>
+<button class="bg-primary text-on-primary font-serif text-lg tracking-tight font-bold px-6 py-2 rounded-xl hover:opacity-80 transition-opacity active:scale-95 duration-150">সাইন আপ</button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Checkout Details -->
+<div class="lg:col-span-7 space-y-12">
+<!-- Section Header -->
+<header>
+<h1 class="font-headline text-4xl md:text-5xl font-bold text-primary mb-4 leading-tight">আপনার এনরোলমেন্ট সম্পূর্ণ করুন</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed">Tanlogy-এর সম্মানজনক একাডেমিক কমিউনিটিতে যোগ দিন। বাংলাদেশের ভবিষ্যতে আপনার স্থান নিশ্চিত করুন।</p>
+</header>
+<!-- Personal Information -->
+<section class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<h2 class="font-headline text-2xl font-bold text-on-surface">ব্যক্তিগত তথ্য</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant block ml-1">পুরো নাম</label>
+<input class="w-full bg-surface-container-lowest ghost-border rounded-xl px-4 py-3 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none" placeholder="জনাব / বেগম" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant block ml-1">ইমেইল এড্রেস</label>
+<input class="w-full bg-surface-container-lowest ghost-border rounded-xl px-4 py-3 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none" placeholder="example@gmail.com" type="email"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant block ml-1">ফোন নম্বর</label>
+<div class="flex gap-2">
+<span class="bg-surface-container-low px-4 py-3 rounded-xl text-on-surface-variant font-medium flex items-center">+880</span>
+<input class="flex-1 bg-surface-container-lowest ghost-border rounded-xl px-4 py-3 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none" placeholder="17XX-XXXXXX" type="tel"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Methods -->
+<section class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+<h2 class="font-headline text-2xl font-bold text-on-surface">পেমেন্ট অপশনসমূহ</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- bKash -->
+<button class="group relative bg-surface-container-lowest p-4 rounded-xl ghost-border hover:border-primary transition-all text-center academic-shadow">
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<img class="h-10 w-auto mx-auto mb-2 object-contain" data-alt="minimalist logo for bkash mobile financial service in Bangladesh pink and white palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwyPweMPPdudItFAHGYjfoaeG1HeEV9MzC3bBRDPx0rejuIF6E-sXlaPFjVNF89fgQzB5EcguKc5d_DVtgcjydJP240tqnHLxwBbTbQjHt4XfBUYuVdX9pA4X0YrXAMfbi07MSUr2l70ehgZ0_GsLt4NMb8jaIB2x6aBVOpT25vIj8lJWN9VgpXFrGP3KOqRsPU_Vj51Iodt1NvjWITYE2pDJUgS5bx7AMPahWh72AhyV0FSLgrKnvCdTnm_8HCkVq8B9k53RSYGY_"/>
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">bKash</span>
+</button>
+<!-- Nagad -->
+<button class="group relative bg-surface-container-lowest p-4 rounded-xl ghost-border hover:border-primary transition-all text-center academic-shadow border-primary border-opacity-0">
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<img class="h-10 w-auto mx-auto mb-2 object-contain" data-alt="minimalist logo for nagad mobile financial service in Bangladesh orange and red palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBudbQ29D3ldBBBa7I-TuDQe8uEPF2rBkvso8fd_rHYR8ySta7bPEQBlMoTawn3Udz_WMhvFthSRIVJUtvvqrGsmN-a7w_FNB9gC3WSW9Qb_ZIKMz-4cHQIVQb3dQPDjaBqHb4oUltNPukKtbtS04qDLjTrRigURdFhBTf4DRV6LZo8U9JzQ3_o-v6Xpmyi50dtHiytkwGD8RVENvDhc6G_B43UNYBnvFMnUmIwx9Ppt0sLCiw6baJAwUH7hq73b--ju2Jqkkf_p86O"/>
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Nagad</span>
+</button>
+<!-- Rocket -->
+<button class="group relative bg-surface-container-lowest p-4 rounded-xl ghost-border hover:border-primary transition-all text-center academic-shadow">
+<img class="h-10 w-auto mx-auto mb-2 object-contain" data-alt="minimalist logo for rocket mobile banking service in Bangladesh purple and white palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPU1uudSfcf0nK94t0KGTGQGw3F3tsKfHux2eZ8G2jdoanlf5WxQOdqY7LRvMPP7T_-wrHQb4FQgO-93GIBreAjkrVHNQlwi1zgCm9wAMnrJomzUgXB-YLQtcVTul2-0E_We9zy2zC8oKIpktFR8MimXq_jxrt42IV31CtMm8o0KdMbPQgB0ggjWChsCwaaniJIT5luwnWr3GS1KAu5kWqSPnZcbA9O1vqhfFJQa68bIfhdVT76dcBtS5ki4N2fHYbj97kL7TN6M3U"/>
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Rocket</span>
+</button>
+<!-- Cards -->
+<button class="group relative bg-surface-container-lowest p-4 rounded-xl ghost-border hover:border-primary transition-all text-center academic-shadow">
+<span class="material-symbols-outlined text-3xl text-secondary mb-2 block" data-icon="credit_card">credit_card</span>
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Cards</span>
+</button>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="info">info</span>
+<div class="space-y-1">
+<p class="text-sm font-semibold text-on-surface">সিকিউর পেমেন্ট গেটওয়ে</p>
+<p class="text-sm text-on-surface-variant mb-2">আপনার ট্রানজ্যাকশন নিরাপদে সম্পন্ন করতে আপনাকে সিকিউর পেমেন্ট প্রদানকারীর কাছে রিডাইরেক্ট করা হবে।</p>
+<p class="text-sm font-bold text-primary">নোট: পেমেন্ট সম্পন্ন করার পর আপনাকে আমাদের সিক্রেট টেলিগ্রাম লার্নিং গ্রুপে অটোমেটিক রিডাইরেক্ট করা হবে।</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-5">
+<div class="sticky top-32 space-y-6">
+<div class="bg-surface-container-lowest academic-shadow rounded-2xl p-8 space-y-8 relative overflow-hidden">
+<!-- Progress Indicator -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<h3 class="font-headline text-2xl font-bold text-on-surface">অর্ডার সারাংশ</h3>
+<!-- Product Item -->
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="premium minimalist online course thumbnail for AI automation featuring glowing digital elements and green accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK5Ner3EgauZRZ6965o8Qdaq68jfwirU3prz1UQrQEvRGuX4_QxSEX5Ok8ZgHA5DaxP2AO1rn4WvSDkb2U_6DtyK9qFQUpWcGzLygIPlmCBwxenOOeUqcEZB8oUHEfxcP4sUAeWrBT9U0NFY1n1ce8iVgTuoxSgBldYPp2UNOAedpGrNW6o3FKQoYKgw288OiSxcqNS9iC0K8TGOWVhCPcDKk02MEoVJ7L1SO_xeblcjiMdvH3m_ZEw3zcsy2FZlJxQn2VXG1xDhQk"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<h4 class="font-bold text-on-surface leading-snug">AI Automation Masterclass</h4>
+<p class="text-sm text-on-surface-variant">সেল্ফ-পেসড লার্নিং</p>
+</div>
+<p class="text-primary font-bold text-lg">৳ ১২,৫০০</p>
+</div>
+</div>
+<!-- Calculations -->
+<div class="space-y-4 pt-6 border-t border-surface-container">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>সাবটোটাল</span>
+<span>৳ ১২,৫০০</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>প্ল্যাটফর্ম ফি</span>
+<span>৳ ০</span>
+</div>
+<div class="flex justify-between items-center text-on-surface text-xl font-bold pt-2">
+<span>সর্বমোট</span>
+<span class="text-primary">৳ ১২,৫০০</span>
+</div>
+</div>
+<!-- Action -->
+<div class="space-y-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-4 rounded-xl font-bold text-lg academic-shadow transition-all hover:scale-[0.98] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+                                পেমেন্ট সম্পন্ন করুন
+                            </button>
+<!-- Trust Badge -->
+<div class="flex items-center justify-center gap-2 py-4 px-6 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="verified_user">verified_user</span>
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">SSL সিকিউরড ট্রানজ্যাকশন</span>
+</div>
+</div>
+</div>
+<!-- Trust Indicators -->
+<div class="px-4 space-y-4">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary" data-icon="history">history</span>
+<span class="text-sm">সকল কোর্স ম্যাটেরিয়ালসে লাইফটাইম অ্যাক্সেস</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary" data-icon="workspace_premium">workspace_premium</span>
+<span class="text-sm">অফিসিয়াল Tanlogy কমপ্লিশন সার্টিফিকেট</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Pre-Footer Newsletter & CTA -->
+<section class="bg-surface py-20 px-6 border-t border-outline-variant/10">
+    <div class="max-w-6xl mx-auto bg-primary-container/20 rounded-3xl p-10 md:p-16 border border-outline-variant/20 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+            <!-- Newsletter -->
+            <div class="space-y-6">
+                <span class="material-symbols-outlined text-4xl text-primary mb-2">mark_email_read</span>
+                <h3 class="text-3xl md:text-4xl font-bold text-on-surface font-headline">আমাদের নতুন টিপস পেতে যুক্ত থাকুন</h3>
+                <p class="text-on-surface-variant leading-relaxed">অটোমেশন এবং ক্যারিয়ার নিয়ে এক্সক্লুসিভ গাইডলাইন, অফার এবং টিপস সরাসরি আপনার ইনবক্সে পেতে সাবস্ক্রাইব করুন।</p>
+                <form class="flex flex-col sm:flex-row gap-3 w-full max-w-md pt-2">
+                    <input type="email" placeholder="আপনার ইমেইল এড্রেস" class="flex-1 bg-white border border-outline-variant/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" required>
+                    <button type="submit" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-on-primary-fixed hover:text-white transition-colors shadow-md transition-transform active:scale-95 whitespace-nowrap">যুক্ত হোন</button>
+                </form>
+            </div>
+            
+            <!-- WhatsApp CTA split style -->
+            <div class="flex flex-col items-start md:items-end md:text-right space-y-6 md:border-l border-outline-variant/20 md:pl-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-3 text-on-surface">কোনো প্রশ্ন আছে?</h3>
+                    <p class="text-on-surface-variant">কোর্স বা ক্যারিয়ার নিয়ে কনফিউজড? আমাদের এক্সপার্ট সাপোর্ট টিমের সাথে সরাসরি কথা বলুন।</p>
+                </div>
+                <a href="#" class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold text-lg hover:-translate-y-1 active:translate-y-0 transition-transform shadow-[0_10px_20px_rgba(37,211,102,0.3)] w-full sm:w-auto">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#0f172a] text-slate-300 w-full pt-16 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 max-w-7xl mx-auto border-b border-slate-800 pb-12">
+        <div class="col-span-1 md:col-span-2 space-y-4">
+            <div class="font-serif text-3xl font-black text-white mb-2">Tanlogy</div>
+            <p class="text-sm leading-relaxed opacity-80 max-w-sm">অত্যাধুনিক স্বয়ংক্রিয় শিক্ষার মাধ্যমে বাংলাদেশের পরবর্তী প্রজন্মের ডিজিটাল উদ্যোক্তাদের ক্ষমতায়ন করা।</p>
+            <div class="flex space-x-5 pt-4">
+                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">facebook</span></a>
+                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">smart_display</span></a>
+                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">work</span></a>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <h5 class="font-bold text-white mb-2">কোম্পানি</h5>
+            <ul class="space-y-3 text-sm opacity-80">
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">আমাদের সম্পর্কে</a></li>
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">কোর্সসমূহ</a></li>
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">সাকসেস স্টোরি</a></li>
+            </ul>
+        </div>
+        <div class="space-y-4">
+            <h5 class="font-bold text-white mb-2">লিগ্যাল ও সাপোর্ট</h5>
+            <ul class="space-y-3 text-sm opacity-80">
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">Privacy Policy</a></li>
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">Terms of Service</a></li>
+                <li><a class="hover:text-emerald-400 transition-colors" href="#">যোগাযোগ করুন</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pt-8 text-center text-sm opacity-60 px-6">
+        <p>© 2024 Tanlogy. All rights reserved. Built for the future of Bangladesh.</p>
+    </div>
+</footer>
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/০১৭xxxxxxxx" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_14px_rgba(37,211,102,0.5)] hover:scale-110 transition-transform flex items-center justify-center group" aria-label="Chat on WhatsApp">
+    <div class="absolute inset-0 rounded-full bg-[#25D366] opacity-0 group-hover:opacity-30 group-hover:animate-ping transition-opacity"></div>
+    <svg class="w-8 h-8 fill-current relative z-10" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+</body></html>
