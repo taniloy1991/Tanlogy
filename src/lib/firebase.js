@@ -5,13 +5,13 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCsxXNn4W8UzpXuVVWWXZ07ILwQyhNtwEc",
-  authDomain: "tanlogy.firebaseapp.com",
-  projectId: "tanlogy",
-  storageBucket: "tanlogy.firebasestorage.app",
-  messagingSenderId: "199379941294",
-  appId: "1:199379941294:web:3b501f59c779ce77f27a3f",
-  measurementId: "G-S7XS46BJWP"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
