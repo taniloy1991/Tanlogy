@@ -40,15 +40,23 @@
 <body class="bg-surface text-on-surface h-screen flex overflow-hidden">
     
     <!-- Sidebar -->
-    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex">
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex z-20">
         <div class="h-16 flex items-center px-6 border-b border-gray-200">
             <span class="font-headline font-black text-2xl text-primary">Tanlogy<span class="text-xs ml-1 text-on-surface-variant">Admin</span></span>
         </div>
         <nav class="flex-1 p-4 space-y-1">
-            <a href="#" class="flex items-center gap-3 bg-primary/10 text-primary px-4 py-3 rounded-lg font-bold">
+            <button onclick="switchAdminTab('enrollments')" id="tab-enrollments" class="w-full text-left flex items-center gap-3 bg-primary/10 text-primary px-4 py-3 rounded-lg font-bold transition-colors">
                 <span class="material-symbols-outlined">dashboard</span>
                 এনরোলমেন্টস (Enrollments)
-            </a>
+            </button>
+            <button onclick="switchAdminTab('courses')" id="tab-courses" class="w-full text-left flex items-center gap-3 text-on-surface-variant hover:bg-gray-100 px-4 py-3 rounded-lg font-medium transition-colors">
+                <span class="material-symbols-outlined">menu_book</span>
+                কোর্স ম্যানেজমেন্ট
+            </button>
+            <button onclick="switchAdminTab('settings')" id="tab-settings" class="w-full text-left flex items-center gap-3 text-on-surface-variant hover:bg-gray-100 px-4 py-3 rounded-lg font-medium transition-colors">
+                <span class="material-symbols-outlined">settings_suggest</span>
+                ফ্রন্টএন্ড সেটিংস
+            </button>
             <a href="index.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-gray-100 px-4 py-3 rounded-lg font-medium transition-colors mt-8">
                 <span class="material-symbols-outlined">open_in_new</span>
                 ওয়েবসাইটে যান
@@ -70,38 +78,148 @@
         </header>
 
         <!-- Content Area -->
-        <div class="flex-1 overflow-auto p-6 bg-gray-50">
+        <div class="flex-1 overflow-auto p-6 bg-gray-50 relative">
             
-            <!-- Page Header -->
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-on-surface mb-2 font-headline">রিসেন্ট এনরোলমেন্টস (Recent Enrollments)</h2>
-                <p class="text-on-surface-variant">এখানে স্টুডেন্টদের কোর্সে ভর্তির রিকুয়েস্টগুলো দেখতে ও ম্যানেজ করতে পারবেন।</p>
+            <!-- Enrollments View -->
+            <div id="view-enrollments" class="tab-content block">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-on-surface mb-2 font-headline">রিসেন্ট এনরোলমেন্টস (Recent Enrollments)</h2>
+                    <p class="text-on-surface-variant">এখানে স্টুডেন্টদের কোর্সে ভর্তির রিকুয়েস্টগুলো দেখতে ও ম্যানেজ করতে পারবেন।</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm whitespace-nowrap">
+                            <thead class="bg-gray-100 text-on-surface-variant font-bold border-b border-gray-200 uppercase text-xs tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-4">স্টুডেন্ট নাম</th>
+                                    <th class="px-6 py-4">ইমেইল / ফোন</th>
+                                    <th class="px-6 py-4">কোর্স</th>
+                                    <th class="px-6 py-4">সোর্স ট্রানজ্যাকশন আইডি</th>
+                                    <th class="px-6 py-4">স্ট্যাটাস</th>
+                                    <th class="px-6 py-4 text-right">অ্যাকশন</th>
+                                </tr>
+                            </thead>
+                            <tbody id="enrollments-table-body" class="divide-y divide-gray-100">
+                                <tr>
+                                    <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                        <span class="material-symbols-outlined animate-spin text-3xl">hourglass_empty</span>
+                                        <p class="mt-2">ডাটা লোড হচ্ছে...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
-            <!-- Table Container -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm whitespace-nowrap">
-                        <thead class="bg-gray-100 text-on-surface-variant font-bold border-b border-gray-200 uppercase text-xs tracking-wider">
-                            <tr>
-                                <th class="px-6 py-4">স্টুডেন্ট নাম</th>
-                                <th class="px-6 py-4">ইমেইল / ফোন</th>
-                                <th class="px-6 py-4">কোর্স</th>
-                                <th class="px-6 py-4">সোর্স ট্রানজ্যাকশন আইডি</th>
-                                <th class="px-6 py-4">স্ট্যাটাস</th>
-                                <th class="px-6 py-4 text-right">অ্যাকশন</th>
-                            </tr>
-                        </thead>
-                        <tbody id="enrollments-table-body" class="divide-y divide-gray-100">
-                            <!-- Rows will be injected here by admin.js -->
-                            <tr>
-                                <td colspan="6" class="px-6 py-8 text-center text-gray-500">
-                                    <span class="material-symbols-outlined animate-spin text-3xl">hourglass_empty</span>
-                                    <p class="mt-2">ডাটা লোড হচ্ছে...</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!-- Courses View -->
+            <div id="view-courses" class="tab-content hidden">
+                <div class="mb-8 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-on-surface mb-2 font-headline">কোর্স ম্যানেজমেন্ট (Manage Courses)</h2>
+                        <p class="text-on-surface-variant">কোর্সের তথ্য, মডিউল এবং ছবি পরিবর্তন করুন।</p>
+                    </div>
+                    <button id="add-course-btn" class="bg-primary text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition hover:bg-emerald-700">
+                        <span class="material-symbols-outlined">add</span> নতুন কোর্স
+                    </button>
+                </div>
+                <!-- Dynamic Course List -->
+                <div id="admin-courses-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="view-settings" class="tab-content hidden">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-on-surface mb-2 font-headline">ফ্রন্টএন্ড সেটিংস (Frontend Settings)</h2>
+                    <p class="text-on-surface-variant">ওয়েবসাইটের হোমপেজের হিরো সেকশন পরিবর্তন করুন।</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 max-w-2xl">
+                    <form id="settings-form" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold text-on-surface-variant mb-2">হিরো হেডলাইন</label>
+                            <input type="text" id="setting-hero-title" class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow disabled:opacity-50" placeholder="Loading...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-on-surface-variant mb-2">সাব-হেডলাইন</label>
+                            <textarea id="setting-hero-subtitle" rows="3" class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow disabled:opacity-50" placeholder="Loading..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-on-surface-variant mb-2">বর্তমান হিরো ইমেজ</label>
+                            <img id="setting-hero-preview" src="" alt="Hero Image Preview" class="w-full h-48 object-cover rounded-xl mb-3 hidden">
+                            <label class="block text-sm font-bold text-on-surface-variant mb-2 mt-4">নতুন ইমেজ আপলোড করুন (Optional)</label>
+                            <input type="file" id="setting-hero-image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition-colors">
+                        </div>
+                        <button type="submit" id="settings-save-btn" class="bg-primary text-white px-6 py-3 rounded-lg font-bold flex items-center justify-center gap-2 w-full transition hover:bg-emerald-700">
+                            সেভ পরিবর্তন
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Course Modal (Hidden) -->
+            <div id="course-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex justify-center items-start pt-10 overflow-y-auto w-full h-full pb-10">
+                <div class="bg-white p-8 rounded-2xl max-w-3xl w-full mx-4 relative overflow-y-auto max-h-fit mb-10">
+                    <button type="button" id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                    <h2 id="modal-title" class="text-2xl font-bold font-headline mb-6">কোর্স সম্পাদনা</h2>
+                    
+                    <form id="course-form" class="space-y-6">
+                        <input type="hidden" id="course-id">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold mb-2">কোর্সের নাম</label>
+                                <input type="text" id="course-title" required class="w-full px-4 py-3 rounded-xl border border-gray-300">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2">লিস্ট পজিশন (Order)</label>
+                                <input type="number" id="course-order" required class="w-full px-4 py-3 rounded-xl border border-gray-300" value="1">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold mb-2">কোর্স সাব-টাইটেল / ডেসক্রিপশন</label>
+                            <textarea id="course-subtitle" required rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-300"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold mb-2">ছবি আপলোড (ব্যানার)</label>
+                            <img id="course-image-preview" src="" class="w-full h-32 object-cover rounded-xl mb-3 hidden">
+                            <input type="file" id="course-image" accept="image/*" class="w-full">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold mb-2">বাটন থিম (Tailwind classes)</label>
+                            <input type="text" id="course-btn-theme" class="w-full px-4 py-3 rounded-xl border border-gray-300" placeholder="e.g. bg-primary text-white">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold mb-2 flex justify-between">
+                                ফিডব্যাক / ফিচার পয়েন্ট (৩টি)
+                            </label>
+                            <div class="space-y-2">
+                                <input type="text" id="course-feat-1" required class="w-full px-4 py-2 rounded border border-gray-300" placeholder="পয়েন্ট ১">
+                                <input type="text" id="course-feat-2" required class="w-full px-4 py-2 rounded border border-gray-300" placeholder="পয়েন্ট ২">
+                                <input type="text" id="course-feat-3" required class="w-full px-4 py-2 rounded border border-gray-300" placeholder="পয়েন্ট ৩">
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-6">
+                            <label class="block text-md font-bold mb-4">কোর্স মডিউল (সিলেবাস)</label>
+                            <div id="modules-container" class="space-y-4 mb-4">
+                                <!-- Dynamic Modules injected here -->
+                            </div>
+                            <button type="button" id="add-module-btn" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-1 hover:bg-gray-200">
+                                <span class="material-symbols-outlined text-[16px]">add</span> মডিউল যোগ করুন
+                            </button>
+                        </div>
+
+                        <button type="submit" id="save-course-btn" class="w-full bg-primary text-white px-6 py-4 rounded-xl font-bold transition hover:bg-emerald-700">
+                            সেভ করুন
+                        </button>
+                    </form>
                 </div>
             </div>
 
