@@ -108,9 +108,27 @@
 <a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">কোর্সসমূহ</a>
 <a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">আমাদের সম্পর্কে</a>
 </div>
-<div class="flex items-center gap-4">
-<button class="hidden md:block px-5 py-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:opacity-80 transition-opacity">লগইন</button>
-<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-xl font-semibold shadow-lg button-settle transition-all">সাইন আপ</button>
+<div class="flex items-center gap-4" id="auth-container">
+    <!-- Logged Out State -->
+    <button id="auth-login-btn" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-xl font-semibold shadow-lg button-settle transition-all flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-sm" data-icon="login">login</span>
+        লগইন
+    </button>
+    <!-- Logged In State (Hidden initially) -->
+    <div id="auth-user-profile" class="hidden relative group cursor-pointer flex items-center gap-3">
+        <span id="auth-user-name" class="font-serif text-sm font-bold text-on-surface">স্বাগতম!</span>
+        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary shadow-sm bg-surface-container">
+            <img id="auth-user-avatar" src="" alt="User Avatar" class="w-full h-full object-cover hidden">
+            <span id="auth-user-fallback" class="material-symbols-outlined text-gray-400 w-full h-full flex items-center justify-center">person</span>
+        </div>
+        <!-- Dropdown Menu -->
+        <div class="absolute right-0 top-full mt-2 w-48 bg-white border border-outline-variant/30 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden text-right">
+            <button id="auth-logout-btn" class="w-full text-left px-4 py-3 text-sm font-bold text-error hover:bg-error-container/50 transition-colors flex items-center gap-2 justify-end">
+                লগ আউট
+                <span class="material-symbols-outlined text-[18px]" data-icon="logout">logout</span>
+            </button>
+        </div>
+    </div>
 </div>
 </div>
 </nav>
@@ -693,4 +711,5 @@
         <p>© 2024 Tanlogy. All rights reserved. Built for the future of Bangladesh.</p>
     </div>
 </footer>
+<script type="module" src="/src/lib/auth.js"></script>
 </body></html>
