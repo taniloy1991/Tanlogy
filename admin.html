@@ -128,6 +128,36 @@
                 <div id="admin-courses-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
             </div>
 
+            <!-- Testimonials Management Tab -->
+            <div id="content-testimonials" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold font-headline">মতামত ম্যানেজমেন্ট</h2>
+                        <p class="text-on-surface-variant text-sm mt-1">ওয়েবসাইটের স্টুডেন্টদের মতামত যোগ করুন বা এডিট করুন।</p>
+                    </div>
+                    <button onclick="openTestimonialModal()" class="bg-primary text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-emerald-700 transition">
+                        <span class="material-symbols-outlined">add</span> নতুন মতামত
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-surface-container-low text-sm">
+                            <tr>
+                                <th class="p-4 border-b">প্রোফাইল</th>
+                                <th class="p-4 border-b">নাম ও পেশা</th>
+                                <th class="p-4 border-b max-w-[300px]">মতামত</th>
+                                <th class="p-4 border-b">ক্রম (Order)</th>
+                                <th class="p-4 border-b text-right">অ্যাকশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-testimonials-container" class="divide-y divide-outline-variant/10 text-sm">
+                            <!-- JS will inject dynamic testimonials here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- Settings View -->
             <div id="view-settings" class="tab-content hidden">
                 <div class="mb-8">
@@ -223,6 +253,52 @@
             </div>
 
         </div>
+
+        <!-- Testimonial Modal (Hidden) -->
+        <div id="testimonial-modal" class="fixed inset-0 bg-black/50 z-[60] hidden flex justify-center items-start pt-10 overflow-y-auto w-full h-full pb-10">
+            <div class="bg-white p-8 rounded-2xl max-w-xl w-full mx-4 relative">
+                <button type="button" id="close-testimonial-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <h2 id="testimonial-modal-title" class="text-2xl font-bold font-headline mb-6">নতুন মতামত</h2>
+                
+                <form id="testimonial-form" class="space-y-4">
+                    <input type="hidden" id="testimonial-id">
+                    
+                    <div>
+                        <label class="block text-sm font-bold mb-2">নাম</label>
+                        <input type="text" id="testi-name" required class="w-full px-4 py-3 rounded-xl border border-gray-300">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold mb-2">পেশা/ঠিকানা <span class="text-xs font-normal text-primary ml-2">(Optional)</span></label>
+                            <input type="text" id="testi-role" class="w-full px-4 py-3 rounded-xl border border-gray-300" placeholder="e.g. সফটওয়্যার ডেভেলপার, ঢাকা">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">লিস্ট পজিশন (Order)</label>
+                            <input type="number" id="testi-order" required class="w-full px-4 py-3 rounded-xl border border-gray-300" value="1">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">মতামত (Review text)</label>
+                        <textarea id="testi-review" required rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-300"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-bold mb-2">প্রোফাইল ছবির URL <span class="text-xs font-normal text-primary ml-2">(Optional)</span></label>
+                        <input type="url" id="testi-image-url" class="w-full px-4 py-3 rounded-xl border border-gray-300" placeholder="e.g. https://i.ibb.co/example.png">
+                    </div>
+
+                    <div class="pt-4 flex justify-end gap-3 border-t">
+                        <button type="button" onclick="closeTestimonialModal()" class="px-6 py-2 rounded-lg text-on-surface-variant font-bold hover:bg-surface-container">বাতিল</button>
+                        <button type="submit" id="testimonial-save-btn" class="bg-primary text-white px-6 py-2 rounded-lg font-bold hover:bg-emerald-700 transition">সেভ করুন</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </main>
 
     <!-- Scripts -->

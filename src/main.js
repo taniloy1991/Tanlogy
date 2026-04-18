@@ -4,6 +4,7 @@ import { collection, getDocs, getDoc, doc, query, orderBy } from 'firebase/fires
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchWebsiteSettings();
     await fetchAndRenderCourses();
+    await fetchAndRenderTestimonials();
 });
 
 // ------------- Settings -------------
@@ -157,4 +158,47 @@ function renderCurriculum(courses) {
         const activeBtn = document.getElementById(`tab-curr-${courseId}`);
         activeBtn.className = "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-primary text-white shadow-lg button-settle curr-tab-btn";
     };
+}
+
+// ------------- Testimonials -------------
+async function fetchAndRenderTestimonials() {
+    try {
+        const q = query(collection(db, "testimonials"), orderBy("order", "asc"));
+        const snap = await getDocs(q);
+        const container = document.getElementById('frontend-testimonials-container');
+        if(!container) return;
+
+        container.innerHTML = '';
+        
+        if (snap.empty) {
+            container.innerHTML = '<p class="text-center w-full text-gray-500 py-8">কোনো মতামত পাওয়া যায়নি।</p>';
+            return;
+        }
+
+        snap.docs.forEach(docSnap => {
+            const data = docSnap.data();
+            const stars = Array(5).fill('<span class="material-symbols-outlined" style="font-variation-settings: \\'FILL\\' 1;">star</span>').join('');
+            
+            // To prevent text from being cut off abruptly, we'll ensure word wrapping
+            const html = \`
+            <div class="min-w-[85vw] md:min-w-[400px] snap-center bg-surface-container-lowest p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-outline-variant/10 shrink-0 flex flex-col hide-scrollbar" style="max-width: 450px; white-space: normal;">
+                <div class="flex gap-1 text-amber-500 mb-6">
+                    \${stars}
+                </div>
+                <p class="text-on-surface-variant mb-8 text-lg font-medium leading-relaxed italic break-words whitespace-normal">"\${data.review}"</p>
+                <div class="flex items-center gap-4 mt-auto">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shadow-inner border border-outline-variant/20 shrink-0">
+                        <img alt="\${data.name}" class="w-full h-full object-cover" src="\${data.image_url || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.name)}"/>
+                    </div>
+                    <div class="overflow-hidden">
+                        <p class="font-bold text-on-surface truncate">\${data.name}</p>
+                        \${data.role ? \`<p class="text-sm text-on-surface-variant truncate">\${data.role}</p>\` : ''}
+                    </div>
+                </div>
+            </div>\`;
+            container.innerHTML += html;
+        });
+    } catch(err) {
+        console.error("Failed to load testimonials:", err);
+    }
 }

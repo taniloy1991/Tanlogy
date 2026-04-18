@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchEnrollments();
             fetchSettings();
             fetchCourses();
+            fetchTestimonials();
         }
     });
 
@@ -335,4 +336,131 @@ async function handleCourseSubmit(e) {
     }
     
     btn.textContent = "সেভ করুন"; btn.disabled = false;
+}
+
+// -------------------------------------------------------------------------------------------------
+// 5. TESTIMONIALS MANAGEMENT
+// -------------------------------------------------------------------------------------------------
+
+window.openTestimonialModal = (docId = null) => {
+    document.getElementById('testimonial-form').reset();
+    document.getElementById('testimonial-id').value = docId || '';
+    document.getElementById('testimonial-modal-title').textContent = docId ? 'এডিট মতামত' : 'নতুন মতামত';
+    
+    if (docId) {
+        // Fetch specific testimonial
+        getDoc(doc(db, "testimonials", docId)).then(snap => {
+            if (snap.exists()) {
+                const data = snap.data();
+                document.getElementById('testi-name').value = data.name || '';
+                document.getElementById('testi-role').value = data.role || '';
+                document.getElementById('testi-order').value = data.order || 1;
+                document.getElementById('testi-review').value = data.review || '';
+                document.getElementById('testi-image-url').value = data.image_url || '';
+            }
+        }).catch(err => console.error("Error fetching testimonial:", err));
+    }
+
+    document.getElementById('testimonial-modal').classList.remove('hidden');
+};
+
+window.closeTestimonialModal = () => {
+    document.getElementById('testimonial-modal').classList.add('hidden');
+};
+
+document.getElementById('close-testimonial-modal-btn')?.addEventListener('click', closeTestimonialModal);
+
+document.getElementById('testimonial-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('testimonial-save-btn');
+    btn.textContent = "Saving..."; btn.disabled = true;
+
+    try {
+        const idInput = document.getElementById('testimonial-id').value;
+        const docId = idInput || (Date.now().toString()); // Simple unique ID
+        
+        const data = {
+            name: document.getElementById('testi-name').value,
+            role: document.getElementById('testi-role').value,
+            order: parseInt(document.getElementById('testi-order').value) || 1,
+            review: document.getElementById('testi-review').value,
+        };
+
+        const imgUrl = document.getElementById('testi-image-url').value;
+        if(imgUrl) data.image_url = imgUrl;
+
+        await withTimeout(
+            setDoc(doc(db, "testimonials", docId), data, { merge: true }),
+            10000,
+            "Database Timeout: Could not connect to Firebase Firestore."
+        );
+        
+        closeTestimonialModal();
+        fetchTestimonials();
+    } catch(err) {
+        console.error(err);
+        alert("Error saving testimonial: " + (err.message || "Unknown error"));
+    }
+    
+    btn.textContent = "সেভ করুন"; btn.disabled = false;
+});
+
+window.deleteTestimonial = async (docId) => {
+    if(!confirm('আপনি কি নিশ্চিত যে এই মতামতটি মুছে ফেলতে চান?')) return;
+    try {
+        await withTimeout(
+            deleteDoc(doc(db, "testimonials", docId)),
+            10000,
+            "Database Timeout"
+        );
+        fetchTestimonials();
+    } catch(err) {
+        console.error("Error deleting testimonial:", err);
+        alert("Error deleting testimonial: " + err.message);
+    }
+}
+
+async function fetchTestimonials() {
+    try {
+        const container = document.getElementById('admin-testimonials-container');
+        if(!container) return; // Wait in case admin.html isn't fully loaded
+
+        const q = query(collection(db, "testimonials"), orderBy("order", "asc"));
+        
+        const snap = await withTimeout(getDocs(q), 10000, "Database Timeout: fetchTestimonials");
+        
+        container.innerHTML = '';
+
+        if(snap.empty) {
+            container.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-500">কোনো মতামত পাওয়া যায়নি।</td></tr>`;
+            return;
+        }
+
+        snap.docs.forEach(docSnap => {
+            const data = docSnap.data();
+            const id = docSnap.id;
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="p-4 align-top">
+                    <img src="\${data.image_url || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.name)}" alt="\${data.name}" class="w-10 h-10 rounded-full object-cover border border-outline-variant/30">
+                </td>
+                <td class="p-4 align-top">
+                    <p class="font-bold">\${data.name}</p>
+                    <p class="text-xs text-on-surface-variant">\${data.role || '-'}</p>
+                </td>
+                <td class="p-4 align-top max-w-[300px]">
+                    <p class="text-xs italic line-clamp-2 text-on-surface-variant whitespace-normal">"\${data.review}"</p>
+                </td>
+                <td class="p-4 align-top font-mono text-sm">\${data.order || 0}</td>
+                <td class="p-4 align-top text-right space-x-2">
+                    <button onclick="openTestimonialModal('\${id}')" class="text-blue-600 hover:text-blue-800 font-bold text-sm bg-blue-50 px-3 py-1 rounded">Edit</button>
+                    <button onclick="deleteTestimonial('\${id}')" class="text-red-600 hover:text-red-800 font-bold text-sm bg-red-50 px-3 py-1 rounded">Delete</button>
+                </td>
+            `;
+            container.appendChild(tr);
+        });
+    } catch(err) {
+        console.error("Error fetching testimonials:", err);
+    }
 }
