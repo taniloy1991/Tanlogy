@@ -15,15 +15,15 @@ async function fetchWebsiteSettings() {
             
             // Hero
             if(data.hero_title) {
-                const titleEl = document.querySelector('h1.font-headline');
+                const titleEl = document.getElementById('hero-title');
                 if(titleEl) titleEl.textContent = data.hero_title;
             }
             if(data.hero_subtitle) {
-                const subEl = document.querySelector('p.text-on-surface-variant.text-lg.md\\:text-xl');
+                const subEl = document.getElementById('hero-subtitle');
                 if(subEl) subEl.textContent = data.hero_subtitle;
             }
             if(data.hero_image_url) {
-                const imgEl = document.querySelector('img[alt="Professional workstation with modern tech"]');
+                const imgEl = document.getElementById('hero-image');
                 if(imgEl) imgEl.src = data.hero_image_url;
             }
         }
