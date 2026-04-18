@@ -9,37 +9,60 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // ------------- Settings -------------
+const DEFAULT_HERO_IMAGE = "https://lh3.googleusercontent.com/aida-public/AB6AXuC4JH_ver9ptFSw68kzmMS1CodJYn7hTf7bSFD8zur75n-jqgn4WkPT5a3SnPqIOst3JCjIPY7nngLT2XKMqigVWJYNJHb97fM6xjdWrGPrJwYgIil6g1CQXVtefXUAi6VrAg8_hq2A9G7Fm2UeXX8F0IhCJbrWrfC9RN3WZw6OSvRPhJhXjiMl_2JNkbizLzYEVbcVFvVpTE3Nr2NmgNwJaCbevfVqk7L8-tRGtIys2RsT2zlgoZgXCCkRDNvxgFhiWwobi5VlwFW2";
+
+function applySettings(data) {
+    if(data.hero_title) {
+        const titleEl = document.getElementById('hero-title');
+        if(titleEl) titleEl.textContent = data.hero_title;
+    }
+    if(data.hero_subtitle) {
+        const subEl = document.getElementById('hero-subtitle');
+        if(subEl) subEl.textContent = data.hero_subtitle;
+    }
+    
+    // Image Handling
+    const imgEl = document.getElementById('hero-image');
+    if(imgEl) {
+        const targetUrl = data.hero_image_url || DEFAULT_HERO_IMAGE;
+        // Check if src is not already the targeturl or if it's the base64 transparent pixel
+        if(imgEl.src !== targetUrl && targetUrl) {
+            imgEl.src = targetUrl;
+        }
+    }
+
+    // Social Area
+    const socialContainer = document.getElementById('footer-social-links');
+    if(data.social && socialContainer) {
+        let sHtml = '';
+        if(data.social.facebook) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="${data.social.facebook}" target="_blank"><span class="material-symbols-outlined text-2xl">facebook</span></a>`;
+        if(data.social.youtube) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="${data.social.youtube}" target="_blank"><span class="material-symbols-outlined text-2xl">smart_display</span></a>`;
+        if(data.social.linkedin) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="${data.social.linkedin}" target="_blank"><span class="material-symbols-outlined text-2xl">work</span></a>`;
+        if(data.social.tiktok) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="${data.social.tiktok}" target="_blank"><span class="material-symbols-outlined text-2xl">music_note</span></a>`;
+        socialContainer.innerHTML = sHtml;
+    }
+}
+
 async function fetchWebsiteSettings() {
     try {
+        const cached = localStorage.getItem('tanlogy_settings');
+        if(cached) {
+            applySettings(JSON.parse(cached));
+        }
+
         const docSnap = await getDoc(doc(db, "website_settings", "global"));
         if (docSnap.exists()) {
             const data = docSnap.data();
-            
-            // Hero
-            if(data.hero_title) {
-                const titleEl = document.getElementById('hero-title');
-                if(titleEl) titleEl.textContent = data.hero_title;
-            }
-            if(data.hero_subtitle) {
-                const subEl = document.getElementById('hero-subtitle');
-                if(subEl) subEl.textContent = data.hero_subtitle;
-            }
-            if(data.hero_image_url) {
-                const imgEl = document.getElementById('hero-image');
-                if(imgEl) imgEl.src = data.hero_image_url;
-            }
-            const socialContainer = document.getElementById('footer-social-links');
-            if(data.social && socialContainer) {
-                let sHtml = '';
-                if(data.social.facebook) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="\${data.social.facebook}" target="_blank"><span class="material-symbols-outlined text-2xl">facebook</span></a>`;
-                if(data.social.youtube) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="\${data.social.youtube}" target="_blank"><span class="material-symbols-outlined text-2xl">smart_display</span></a>`;
-                if(data.social.linkedin) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="\${data.social.linkedin}" target="_blank"><span class="material-symbols-outlined text-2xl">work</span></a>`;
-                if(data.social.tiktok) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="\${data.social.tiktok}" target="_blank"><span class="material-symbols-outlined text-2xl">music_note</span></a>`;
-                socialContainer.innerHTML = sHtml;
-            }
+            localStorage.setItem('tanlogy_settings', JSON.stringify(data));
+            applySettings(data);
+        } else {
+            // Apply fallback if completely empty
+            applySettings({ hero_image_url: DEFAULT_HERO_IMAGE });
         }
     } catch(err) {
         console.error("Failed to load settings:", err);
+        // Apply fallback if error
+        applySettings({ hero_image_url: DEFAULT_HERO_IMAGE });
     }
 }
 
