@@ -1,7 +1,7 @@
 import { auth, db, storage } from './lib/firebase.js';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, getDocs, getDoc, query, orderBy, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { runMigration } from './lib/migration.js';
 
 const ADMIN_EMAIL = 'taniloy334@gmail.com';
@@ -120,15 +120,11 @@ async function handleStatusChange(docId, newStatus, btn) {
 
 // ------------- File Upload General Function -------------
 async function uploadImage(file, folderPath) {
-    return new Promise((resolve, reject) => {
-        if (!file) return resolve(null);
-        const storageRef = ref(storage, `${folderPath}/${Date.now()}_${file.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-        uploadTask.on('state_changed', null, (error) => reject(error), async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            resolve(downloadURL);
-        });
-    });
+    if (!file) return null;
+    const storageRef = ref(storage, `${folderPath}/${Date.now()}_${file.name}`);
+    // Using uploadBytes directly returns a promise that resolves or rejects properly
+    const snapshot = await uploadBytes(storageRef, file);
+    return await getDownloadURL(snapshot.ref);
 }
 
 // ------------- Settings Logic -------------
@@ -168,9 +164,13 @@ async function handleSettingsSubmit(e) {
             img.classList.remove('hidden');
         }
 
-        await updateDoc(doc(db, "website_settings", "global"), updateData);
+        await setDoc(doc(db, "website_settings", "global"), updateData, { merge: true });
         alert("Settings Saved!");
-    } catch(err) { console.error(err); alert("Error saving settings."); }
+    } catch(err) { 
+        console.error(err); 
+        alert("Error saving settings. Contact administrator or check permissions.");
+    }
+    
     btn.textContent = "সেভ পরিবর্তন";
     btn.disabled = false;
 }
