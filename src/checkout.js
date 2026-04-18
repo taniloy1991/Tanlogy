@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Redirect after 3s
                 setTimeout(() => {
-                    window.location.href = "https://t.me/dummy_tanlogy_link";
+                    window.location.href = "https://t.me/+9bjMB0yxnOJhYjFl";
                 }, 3000);
 
             } catch (error) {

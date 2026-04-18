@@ -4,6 +4,7 @@ import { collection, getDocs, getDoc, doc, query, orderBy } from 'firebase/fires
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchWebsiteSettings();
     await fetchAndRenderCourses();
+    await fetchAndRenderBlogs();
     await fetchAndRenderTestimonials();
 });
 
@@ -27,6 +28,15 @@ async function fetchWebsiteSettings() {
                 const imgEl = document.getElementById('hero-image');
                 if(imgEl) imgEl.src = data.hero_image_url;
             }
+            const socialContainer = document.getElementById('footer-social-links');
+            if(data.social && socialContainer) {
+                let sHtml = '';
+                if(data.social.facebook) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="\${data.social.facebook}" target="_blank"><span class="material-symbols-outlined text-2xl">facebook</span></a>`;
+                if(data.social.youtube) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="\${data.social.youtube}" target="_blank"><span class="material-symbols-outlined text-2xl">smart_display</span></a>`;
+                if(data.social.linkedin) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="\${data.social.linkedin}" target="_blank"><span class="material-symbols-outlined text-2xl">work</span></a>`;
+                if(data.social.tiktok) sHtml += `<a class="hover:text-emerald-400 transition-colors" href="\${data.social.tiktok}" target="_blank"><span class="material-symbols-outlined text-2xl">music_note</span></a>`;
+                socialContainer.innerHTML = sHtml;
+            }
         }
     } catch(err) {
         console.error("Failed to load settings:", err);
@@ -42,6 +52,19 @@ async function fetchAndRenderCourses() {
         
         renderCourseCards(courses);
         renderCurriculum(courses);
+        
+        // Populate navbar dropdown
+        const navDropdown = document.getElementById('nav-courses-dropdown');
+        if (navDropdown) {
+            navDropdown.innerHTML = '';
+            courses.forEach(course => {
+                navDropdown.innerHTML += `
+                    <a href="#curr-tab-content" onclick="window.switchCurrTab('\${course.id}')" class="px-5 py-3 hover:bg-surface-container transition flex items-center gap-2 font-bold text-sm text-on-surface">
+                        <span class="material-symbols-outlined text-primary text-[18px]">play_lesson</span> \${course.title}
+                    </a>
+                `;
+            });
+        }
     } catch(err) {
         console.error("Failed to load courses:", err);
         document.getElementById('frontend-courses-grid').innerHTML = '<p class="text-red-500">Failed to load courses. Please try again later.</p>';
@@ -66,13 +89,11 @@ function renderCourseCards(courses) {
             });
         }
 
-        const isPopularBadge = course.isPopular ? `<div class="absolute top-4 right-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest z-10">Popular</div>` : '';
         const imageHtml = course.image_url ? `<img src="${course.image_url}" class="w-full h-40 object-cover rounded-xl mb-4" alt="${course.title}">` : `<div class="w-full h-40 bg-gray-200 rounded-xl mb-4 animate-pulse flex items-center justify-center text-gray-500"><span class="material-symbols-outlined text-4xl">image</span></div>`;
         const themeStr = course.button_theme || 'bg-primary text-on-primary';
 
         const cardHtml = `
             <div class="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full relative overflow-hidden group">
-                ${isPopularBadge}
                 <div class="mb-6 flex-grow relative z-10">
                     ${imageHtml}
                     <h3 class="text-2xl font-bold mb-3 font-headline text-on-surface">${course.title}</h3>
@@ -90,24 +111,11 @@ function renderCourseCards(courses) {
 }
 
 function renderCurriculum(courses) {
-    const tabsContainer = document.getElementById('curriculum-tabs-container');
     const contentContainer = document.getElementById('curriculum-content-container');
     
-    tabsContainer.innerHTML = '';
     contentContainer.innerHTML = '';
 
-    courses.forEach((course, index) => {
-        // Tab Button
-        const isActive = index === 0;
-        const btnClass = isActive 
-            ? "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-primary text-white shadow-lg button-settle curr-tab-btn"
-            : "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest button-settle curr-tab-btn";
-            
-        const btnHtml = `<button onclick="window.switchCurrTab('${course.id}')" id="tab-curr-${course.id}" class="${btnClass}">${course.title}</button>`;
-        tabsContainer.innerHTML += btnHtml;
-
-        // Content
-        const contentClass = isActive ? "space-y-4 curr-tab-content block" : "space-y-4 curr-tab-content hidden";
+    courses.forEach((course) => {
         let modulesHtml = '';
 
         if(course.modules && Array.isArray(course.modules)) {
@@ -120,7 +128,7 @@ function renderCurriculum(courses) {
                 }
 
                 modulesHtml += `
-                    <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden" ${mIndex === 0 ? 'open' : ''}>
+                    <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden" open>
                         <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
                             <div class="flex items-center gap-4">
                                 <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">${mIndex + 1}</span>
@@ -141,23 +149,16 @@ function renderCurriculum(courses) {
             modulesHtml = `<p class="text-gray-500 text-center py-4">No modules found for this course.</p>`;
         }
 
-        const contentHtml = `<div id="content-curr-${course.id}" class="${contentClass}">${modulesHtml}</div>`;
-        contentContainer.innerHTML += contentHtml;
+        const courseHtml = `
+            <div class="mb-12">
+                <h3 class="text-3xl font-bold mb-6 text-on-surface font-headline border-b border-outline-variant/20 pb-4">${course.title}</h3>
+                <div class="space-y-4">
+                    ${modulesHtml}
+                </div>
+            </div>
+        `;
+        contentContainer.innerHTML += courseHtml;
     });
-
-    // Make switchTab available globally
-    window.switchCurrTab = (courseId) => {
-        document.querySelectorAll('.curr-tab-content').forEach(el => {
-            el.classList.replace('block', 'hidden');
-        });
-        document.getElementById(`content-curr-${courseId}`).classList.replace('hidden', 'block');
-
-        document.querySelectorAll('.curr-tab-btn').forEach(btn => {
-            btn.className = "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container-highest button-settle curr-tab-btn";
-        });
-        const activeBtn = document.getElementById(`tab-curr-${courseId}`);
-        activeBtn.className = "flex-1 py-4 px-6 rounded-xl font-bold transition-all bg-primary text-white shadow-lg button-settle curr-tab-btn";
-    };
 }
 
 // ------------- Testimonials -------------
@@ -200,5 +201,45 @@ async function fetchAndRenderTestimonials() {
         });
     } catch(err) {
         console.error("Failed to load testimonials:", err);
+    }
+}
+
+// ------------- Blogs -------------
+async function fetchAndRenderBlogs() {
+    try {
+        const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
+        const container = document.getElementById('frontend-blogs-container');
+        if(!container) return;
+
+        container.innerHTML = '';
+        
+        if (snap.empty) {
+            container.innerHTML = '<p class="text-center w-full text-gray-500 py-8">কোনো ব্লগ পাওয়া যায়নি।</p>';
+            return;
+        }
+
+        snap.docs.forEach(docSnap => {
+            const data = docSnap.data();
+            const dateStr = data.createdAt ? new Date(data.createdAt.toMillis()).toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+            
+            const html = `
+            <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="${data.image_url || 'https://via.placeholder.com/600x400'}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="${data.title}">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-xs font-bold text-primary mb-3 block">${dateStr}</span>
+                    <h3 class="text-xl font-bold mb-3 font-headline text-on-surface line-clamp-2">${data.title}</h3>
+                    <p class="text-on-surface-variant text-sm mb-6 line-clamp-3">${data.excerpt || ''}</p>
+                    <a href="${data.link || '#'}" class="mt-auto text-primary font-bold text-sm hover:text-emerald-700 flex items-center gap-1 transition-colors w-fit">
+                        বিস্তারিত পড়ুন <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+                    </a>
+                </div>
+            </div>`;
+            container.innerHTML += html;
+        });
+    } catch(err) {
+        console.error("Failed to load blogs:", err);
     }
 }

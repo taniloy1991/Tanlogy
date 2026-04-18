@@ -101,12 +101,17 @@
 <a href="index.html" class="flex items-center">
     <img src="/logo.png" alt="Tanlogy Logo" class="h-14 w-auto drop-shadow-sm" />
 </a>
-<!-- Desktop Navigation -->
 <div class="hidden md:flex items-center space-gap-8 gap-x-8">
-<a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">AI Automation</a>
-<a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">YouTube Automation</a>
-<a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">কোর্সসমূহ</a>
-<a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">আমাদের সম্পর্কে</a>
+    <div class="relative group py-2">
+        <a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity flex items-center gap-1 cursor-pointer" href="#courses">
+            কোর্সসমূহ <span class="material-symbols-outlined text-sm">expand_more</span>
+        </a>
+        <div id="nav-courses-dropdown" class="absolute left-0 top-full w-64 bg-white border border-outline-variant/30 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden flex flex-col py-2">
+            <div class="px-4 py-2 text-sm text-gray-500 animate-pulse">Loading...</div>
+        </div>
+    </div>
+    <a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="blog.html">ব্লগ</a>
+    <a class="font-serif text-lg tracking-tight font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 transition-opacity" href="#">আমাদের সম্পর্কে</a>
 </div>
 <div class="flex items-center gap-4" id="auth-container">
     <!-- Logged Out State -->
@@ -162,6 +167,33 @@
 </div>
 </div>
 </section>
+<!-- Blog Section -->
+<section id="blog" class="bg-surface py-24 px-6 border-b border-outline-variant/10">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-16">
+            <div>
+                <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-primary bg-primary/10 rounded-full uppercase">লেটেস্ট আপডেট</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-on-surface font-headline">আর্টিকেল ও কেস স্টাডি</h2>
+            </div>
+            <a href="blog.html" class="hidden md:flex items-center gap-2 text-primary font-bold hover:text-emerald-700 transition">
+                সবগুলো দেখুন <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+        <div id="frontend-blogs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic Blogs Loading Placeholder -->
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-10">
+                <span class="material-symbols-outlined animate-spin text-4xl text-primary">hourglass_empty</span>
+                <p class="mt-4 text-on-surface-variant">ব্লগ লোড হচ্ছে...</p>
+            </div>
+        </div>
+        <div class="mt-10 text-center md:hidden">
+            <a href="blog.html" class="inline-flex items-center gap-2 text-primary font-bold hover:text-emerald-700 transition">
+                সবগুলো দেখুন <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+</section>
+
 <!-- Course Cards Section -->
 <section id="courses" class="bg-surface-container-low py-24 px-6">
 <div class="max-w-7xl mx-auto">
@@ -185,9 +217,6 @@
         <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-primary bg-primary/10 rounded-full uppercase">সিলেবাস</span>
         <h2 class="text-4xl md:text-5xl font-bold font-headline text-on-surface">কোর্স কারিকুলাম</h2>
     </div>
-    
-    <!-- Tab Controls via JS -->
-    <div id="curriculum-tabs-container" class="flex flex-col sm:flex-row gap-4 justify-center mb-12"></div>
 
     <!-- Syllabus Content via JS -->
     <div id="curriculum-content-container" class="space-y-4">
@@ -404,10 +433,8 @@
         <div class="col-span-1 md:col-span-2 space-y-4">
             <div class="font-serif text-3xl font-black text-white mb-2">Tanlogy</div>
             <p class="text-sm leading-relaxed opacity-80 max-w-sm">অত্যাধুনিক স্বয়ংক্রিয় শিক্ষার মাধ্যমে বাংলাদেশের পরবর্তী প্রজন্মের ডিজিটাল উদ্যোক্তাদের ক্ষমতায়ন করা।</p>
-            <div class="flex space-x-5 pt-4">
-                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">facebook</span></a>
-                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">smart_display</span></a>
-                <a class="hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined text-2xl">work</span></a>
+            <div class="flex space-x-5 pt-4" id="footer-social-links">
+                <!-- Dynamic Social Links Here -->
             </div>
         </div>
         <div class="space-y-4">

@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchEnrollments();
             fetchSettings();
             fetchCourses();
+            fetchBlogs();
             fetchTestimonials();
         }
     });
@@ -148,7 +149,13 @@ async function fetchSettings() {
         document.getElementById('setting-hero-title').value = d.hero_title || '';
         document.getElementById('setting-hero-subtitle').value = d.hero_subtitle || '';
         document.getElementById('setting-hero-image-url').value = d.hero_image_url || '';
-        // No image preview handling here since we use URL input directly
+        // Social Media
+        if(d.social) {
+            document.getElementById('setting-social-facebook').value = d.social.facebook || '';
+            document.getElementById('setting-social-tiktok').value = d.social.tiktok || '';
+            document.getElementById('setting-social-youtube').value = d.social.youtube || '';
+            document.getElementById('setting-social-linkedin').value = d.social.linkedin || '';
+        }
     }
 }
 
@@ -162,11 +169,21 @@ async function handleSettingsSubmit(e) {
         const title = document.getElementById('setting-hero-title').value;
         const sub = document.getElementById('setting-hero-subtitle').value;
         const imgUrl = document.getElementById('setting-hero-image-url').value;
+        const socialFb = document.getElementById('setting-social-facebook').value;
+        const socialTk = document.getElementById('setting-social-tiktok').value;
+        const socialYt = document.getElementById('setting-social-youtube').value;
+        const socialLi = document.getElementById('setting-social-linkedin').value;
         
         let updateData = { 
             hero_title: title, 
             hero_subtitle: sub,
-            hero_image_url: imgUrl 
+            hero_image_url: imgUrl,
+            social: {
+                facebook: socialFb,
+                tiktok: socialTk,
+                youtube: socialYt,
+                linkedin: socialLi
+            }
         };
 
         await withTimeout(
@@ -462,5 +479,133 @@ async function fetchTestimonials() {
         });
     } catch(err) {
         console.error("Error fetching testimonials:", err);
+    }
+}
+
+// -------------------------------------------------------------------------------------------------
+// 6. BLOGS MANAGEMENT
+// -------------------------------------------------------------------------------------------------
+
+window.openBlogModal = (docId = null) => {
+    document.getElementById('blog-form').reset();
+    document.getElementById('blog-id').value = docId || '';
+    document.getElementById('blog-modal-title').textContent = docId ? 'এডিট ব্লগ' : 'নতুন ব্লগ';
+    
+    if (docId) {
+        getDoc(doc(db, "blogs", docId)).then(snap => {
+            if (snap.exists()) {
+                const data = snap.data();
+                document.getElementById('blog-title').value = data.title || '';
+                document.getElementById('blog-excerpt').value = data.excerpt || '';
+                document.getElementById('blog-link').value = data.link || '';
+                document.getElementById('blog-image-url').value = data.image_url || '';
+            }
+        }).catch(err => console.error("Error fetching blog:", err));
+    }
+
+    document.getElementById('blog-modal').classList.remove('hidden');
+};
+
+window.closeBlogModal = () => {
+    document.getElementById('blog-modal').classList.add('hidden');
+};
+
+document.getElementById('blog-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('blog-save-btn');
+    btn.textContent = "Saving..."; btn.disabled = true;
+
+    try {
+        const idInput = document.getElementById('blog-id').value;
+        const docId = idInput || `blog_${Date.now()}`;
+        
+        const data = {
+            title: document.getElementById('blog-title').value,
+            excerpt: document.getElementById('blog-excerpt').value,
+            link: document.getElementById('blog-link').value,
+            createdAt: serverTimestamp() // We leave this even for update, or just use new Date if we want simpler
+        };
+        
+        // Only set createdAt if new
+        if(!idInput) {
+            data.createdAt = new Date();
+        } else {
+            delete data.createdAt; // Don't overwrite existing
+        }
+
+        const imgUrl = document.getElementById('blog-image-url').value;
+        if(imgUrl) data.image_url = imgUrl;
+
+        await withTimeout(
+            setDoc(doc(db, "blogs", docId), data, { merge: true }),
+            10000,
+            "Database Timeout: Could not connect to Firebase Firestore."
+        );
+        
+        closeBlogModal();
+        fetchBlogs();
+    } catch(err) {
+        console.error(err);
+        alert("Error saving blog: " + (err.message || "Unknown error"));
+    }
+    
+    btn.textContent = "সেভ করুন"; btn.disabled = false;
+});
+
+window.deleteBlog = async (docId) => {
+    if(!confirm('আপনি কি নিশ্চিত যে এই ব্লগটি মুছে ফেলতে চান?')) return;
+    try {
+        await withTimeout(
+            deleteDoc(doc(db, "blogs", docId)),
+            10000,
+            "Database Timeout"
+        );
+        fetchBlogs();
+    } catch(err) {
+        console.error("Error deleting blog:", err);
+        alert("Error deleting blog: " + err.message);
+    }
+}
+
+async function fetchBlogs() {
+    try {
+        const container = document.getElementById('admin-blogs-container');
+        if(!container) return;
+
+        const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
+        const snap = await withTimeout(getDocs(q), 10000, "Database Timeout: fetchBlogs");
+        
+        container.innerHTML = '';
+
+        if(snap.empty) {
+            container.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500">কোনো ব্লগ পাওয়া যায়নি।</td></tr>`;
+            return;
+        }
+
+        snap.docs.forEach(docSnap => {
+            const data = docSnap.data();
+            const id = docSnap.id;
+            const dateStr = data.createdAt && data.createdAt.toMillis ? new Date(data.createdAt.toMillis()).toLocaleDateString() : 'N/A';
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="p-4 align-top">
+                    <img src="${data.image_url || 'https://via.placeholder.com/150'}" alt="${data.title}" class="w-16 h-10 rounded object-cover border border-outline-variant/30">
+                </td>
+                <td class="p-4 align-top w-1/3">
+                    <p class="font-bold line-clamp-2">${data.title}</p>
+                </td>
+                <td class="p-4 align-top text-sm">
+                    ${dateStr}
+                </td>
+                <td class="p-4 align-top text-right space-x-2">
+                    <button onclick="openBlogModal('${id}')" class="text-blue-600 hover:text-blue-800 font-bold text-sm bg-blue-50 px-3 py-1 rounded">Edit</button>
+                    <button onclick="deleteBlog('${id}')" class="text-red-600 hover:text-red-800 font-bold text-sm bg-red-50 px-3 py-1 rounded">Delete</button>
+                </td>
+            `;
+            container.appendChild(tr);
+        });
+    } catch(err) {
+        console.error("Error fetching blogs:", err);
     }
 }
