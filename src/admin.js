@@ -92,7 +92,11 @@ async function fetchEnrollments() {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="px-6 py-4 font-bold">${data.providedName || 'N/A'}</td>
-                <td class="px-6 py-4"><div class="text-sm">${data.providedEmail || 'N/A'}</div><div class="text-xs text-gray-500">${data.providedPhone || 'N/A'}</div></td>
+                <td class="px-6 py-4">
+                    <div class="text-sm border-b pb-1 mb-1">${data.providedEmail || 'N/A'}</div>
+                    <div class="text-xs text-gray-500">স্টুডেন্ট: ${data.providedPhone || 'N/A'}</div>
+                    ${data.senderPhone ? `<div class="text-xs text-primary font-bold mt-1">সেন্ডার: ${data.senderPhone}</div>` : ''}
+                </td>
                 <td class="px-6 py-4 font-medium text-primary">${data.courseName || 'N/A'}</td>
                 <td class="px-6 py-4 font-mono text-xs">${data.transactionId || 'N/A'}</td>
                 <td class="px-6 py-4">${statusBadge}</td>

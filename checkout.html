@@ -158,6 +158,13 @@
 </div>
 </div>
 <div class="md:col-span-2 space-y-2 pt-2">
+<label class="text-sm font-semibold text-on-surface-variant block ml-1">সেন্ডার নাম্বার (যে নাম্বার থেকে টাকা পাঠিয়েছেন)</label>
+<div class="flex gap-2">
+<span class="bg-surface-container-low px-4 py-3 rounded-xl text-on-surface-variant font-medium flex items-center">+880</span>
+<input id="checkout-sender-phone" class="flex-1 bg-surface-container-lowest ghost-border rounded-xl px-4 py-3 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none" placeholder="17XX-XXXXXX" type="tel"/>
+</div>
+</div>
+<div class="md:col-span-2 space-y-2 pt-2">
 <label class="text-sm font-semibold text-on-surface-variant block ml-1">ট্রানজ্যাকশন আইডি (Transaction ID)</label>
 <input id="checkout-trx" class="w-full bg-surface-container-lowest ghost-border rounded-xl px-4 py-3 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none" placeholder="e.g. 9JA7B5KX" type="text"/>
 </div>
@@ -169,7 +176,7 @@
 <span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
 <h2 class="font-headline text-2xl font-bold text-on-surface">পেমেন্ট অপশনসমূহ</h2>
 </div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="grid grid-cols-2 md:grid-cols-2 gap-4">
 <!-- bKash -->
 <button class="group relative bg-surface-container-lowest p-4 rounded-xl ghost-border hover:border-primary transition-all text-center academic-shadow">
 <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -186,22 +193,12 @@
 <img class="h-10 w-auto mx-auto mb-2 object-contain" data-alt="minimalist logo for nagad mobile financial service in Bangladesh orange and red palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBudbQ29D3ldBBBa7I-TuDQe8uEPF2rBkvso8fd_rHYR8ySta7bPEQBlMoTawn3Udz_WMhvFthSRIVJUtvvqrGsmN-a7w_FNB9gC3WSW9Qb_ZIKMz-4cHQIVQb3dQPDjaBqHb4oUltNPukKtbtS04qDLjTrRigURdFhBTf4DRV6LZo8U9JzQ3_o-v6Xpmyi50dtHiytkwGD8RVENvDhc6G_B43UNYBnvFMnUmIwx9Ppt0sLCiw6baJAwUH7hq73b--ju2Jqkkf_p86O"/>
 <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Nagad</span>
 </button>
-<!-- Rocket -->
-<button class="group relative bg-surface-container-lowest p-4 rounded-xl ghost-border hover:border-primary transition-all text-center academic-shadow">
-<img class="h-10 w-auto mx-auto mb-2 object-contain" data-alt="minimalist logo for rocket mobile banking service in Bangladesh purple and white palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPU1uudSfcf0nK94t0KGTGQGw3F3tsKfHux2eZ8G2jdoanlf5WxQOdqY7LRvMPP7T_-wrHQb4FQgO-93GIBreAjkrVHNQlwi1zgCm9wAMnrJomzUgXB-YLQtcVTul2-0E_We9zy2zC8oKIpktFR8MimXq_jxrt42IV31CtMm8o0KdMbPQgB0ggjWChsCwaaniJIT5luwnWr3GS1KAu5kWqSPnZcbA9O1vqhfFJQa68bIfhdVT76dcBtS5ki4N2fHYbj97kL7TN6M3U"/>
-<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Rocket</span>
-</button>
-<!-- Cards -->
-<button class="group relative bg-surface-container-lowest p-4 rounded-xl ghost-border hover:border-primary transition-all text-center academic-shadow">
-<span class="material-symbols-outlined text-3xl text-secondary mb-2 block" data-icon="credit_card">credit_card</span>
-<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Cards</span>
-</button>
 </div>
 <div class="bg-primary/10 border border-primary/20 p-6 rounded-xl flex items-start gap-4">
 <span class="material-symbols-outlined text-primary mt-1" data-icon="account_balance_wallet">account_balance_wallet</span>
 <div class="space-y-2">
 <p class="text-lg font-bold text-primary">পেমেন্ট ইন্সট্রাকশন</p>
-<p class="text-sm text-on-surface-variant mb-2">আপনার ভর্তি নিশ্চিত করতে নিচের নাম্বারে (বিকাশ/নগদ/রকেট) সেন্ড মানি করুন এবং ফর্মের ঘরে ট্রানজ্যাকশন আইডি (Transaction ID) প্রদান করুন।</p>
+<p class="text-sm text-on-surface-variant mb-2">আপনার ভর্তি নিশ্চিত করতে নিচের নাম্বারে (বিকাশ/নগদ) সেন্ড মানি করুন এবং ফর্মের ঘরে ট্রানজ্যাকশন আইডি (Transaction ID) প্রদান করুন।</p>
 <div class="bg-white px-4 py-3 rounded-lg border border-primary/30 inline-block">
     <p class="text-sm text-gray-500 mb-1">পেমেন্ট নাম্বার (Personal)</p>
     <p class="text-2xl font-black tracking-wider text-on-surface">01515637732</p>

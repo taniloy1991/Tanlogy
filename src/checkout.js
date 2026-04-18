@@ -20,10 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = document.getElementById('checkout-name').value;
             const email = document.getElementById('checkout-email').value;
             const phone = document.getElementById('checkout-phone').value;
+            const senderPhone = document.getElementById('checkout-sender-phone').value;
             const trxId = document.getElementById('checkout-trx').value;
             
             // Basic Validation
-            if (!name || !email || !phone || !trxId) {
+            if (!name || !email || !phone || !senderPhone || !trxId) {
                 alert("অনুগ্রহ করে সবগুলো ফিল্ড সঠিকভাবে পূরণ করুন।");
                 return;
             }
@@ -45,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     providedName: name,
                     providedEmail: email,
                     providedPhone: phone,
+                    senderPhone: senderPhone,
                     courseName: courseName,
                     transactionId: trxId,
                     status: 'pending',
