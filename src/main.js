@@ -201,25 +201,25 @@ async function fetchAndRenderTestimonials() {
 
         snap.docs.forEach(docSnap => {
             const data = docSnap.data();
-            const stars = Array(5).fill('<span class="material-symbols-outlined" style="font-variation-settings: \\'FILL\\' 1;">star</span>').join('');
+            const stars = Array(5).fill('<span class="material-symbols-outlined" style="font-variation-settings: &apos;FILL&apos; 1;">star</span>').join('');
             
             // To prevent text from being cut off abruptly, we'll ensure word wrapping
-            const html = \`
+            const html = `
             <div class="min-w-[85vw] md:min-w-[400px] snap-center bg-surface-container-lowest p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-outline-variant/10 shrink-0 flex flex-col hide-scrollbar" style="max-width: 450px; white-space: normal;">
                 <div class="flex gap-1 text-amber-500 mb-6">
-                    \${stars}
+                    ${stars}
                 </div>
-                <p class="text-on-surface-variant mb-8 text-lg font-medium leading-relaxed italic break-words whitespace-normal">"\${data.review}"</p>
+                <p class="text-on-surface-variant mb-8 text-lg font-medium leading-relaxed italic break-words whitespace-normal">"${data.review}"</p>
                 <div class="flex items-center gap-4 mt-auto">
                     <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shadow-inner border border-outline-variant/20 shrink-0">
-                        <img alt="\${data.name}" class="w-full h-full object-cover" src="\${data.image_url || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.name)}"/>
+                        <img alt="${data.name}" class="w-full h-full object-cover" src="${data.image_url || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.name)}"/>
                     </div>
                     <div class="overflow-hidden">
-                        <p class="font-bold text-on-surface truncate">\${data.name}</p>
-                        \${data.role ? \`<p class="text-sm text-on-surface-variant truncate">\${data.role}</p>\` : ''}
+                        <p class="font-bold text-on-surface truncate">${data.name}</p>
+                        ${data.role ? `<p class="text-sm text-on-surface-variant truncate">${data.role}</p>` : ''}
                     </div>
                 </div>
-            </div>\`;
+            </div>`;
             container.innerHTML += html;
         });
     } catch(err) {
