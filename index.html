@@ -153,9 +153,6 @@
 <a href="#courses" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-bold text-lg shadow-xl button-settle flex items-center justify-center gap-2 w-fit">
                             কোর্সগুলো এক্সপ্লোর করুন <span class="material-symbols-outlined">arrow_forward</span>
 </a>
-<button class="bg-surface-container-high text-primary px-8 py-4 rounded-xl font-bold text-lg button-settle flex items-center justify-center gap-2">
-                            সাকসেস স্টোরিগুলো দেখুন
-                        </button>
 </div>
 </div>
 <div class="relative">
@@ -327,6 +324,23 @@
         <div id="frontend-testimonials-container" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pt-4 pb-12 hide-scrollbar">
             <div class="animate-pulse w-full h-40 bg-surface-container rounded-2xl flex items-center justify-center text-on-surface-variant font-bold">Loading Testimonials...</div>
         </div>
+
+        <!-- Student Form for Testimonial Submission (Only visible for logged in non-admin users) -->
+        <div id="testimonial-form-section" class="hidden mt-10 max-w-2xl mx-auto bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/20">
+            <h3 class="text-2xl font-bold mb-6 text-on-surface">আপনার মতামত শেয়ার করুন</h3>
+            <form id="student-testimonial-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-on-surface-variant">আপনার নাম</label>
+                    <input type="text" id="testi-name" class="w-full px-4 py-3 bg-surface-container text-on-surface rounded-xl border-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-on-surface-variant">মতামত (Review)</label>
+                    <textarea id="testi-review" rows="3" class="w-full px-4 py-3 bg-surface-container text-on-surface rounded-xl border-none focus:ring-2 focus:ring-primary" required></textarea>
+                </div>
+                <button type="submit" class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:-translate-y-1 transition w-full md:w-auto">মতামত সাবমিট করুন</button>
+            </form>
+            <p id="testi-msg" class="mt-4 text-sm font-bold"></p>
+        </div>
     </div>
 </section>
 
@@ -390,8 +404,8 @@
 <h2 class="text-4xl md:text-6xl font-bold mb-8">ভবিষ্যৎ গড়তে আপনি কি প্রস্তুত?</h2>
 <p class="text-xl mb-12 opacity-90 max-w-2xl mx-auto">বাংলাদেশের ১২০০+ ছাত্রছাত্রীদের সাথে যোগ দিন যারা ইতিমধ্যে অটোমেশনের মাধ্যমে তাদের জীবন পরিবর্তন করছে।</p>
 <div class="flex flex-col sm:flex-row gap-6 justify-center">
-<button class="bg-white text-primary px-10 py-5 rounded-xl font-bold text-xl shadow-2xl button-settle">আজই শেখা শুরু করুন</button>
-<button class="bg-primary-container text-on-primary-container px-10 py-5 rounded-xl font-bold text-xl shadow-2xl button-settle">উপদেষ্টার সাথে কথা বলুন</button>
+<a href="#courses" class="bg-white text-primary px-10 py-5 rounded-xl font-bold text-xl shadow-2xl button-settle inline-block text-center hover:scale-105 transition-transform">আজই শেখা শুরু করুন</a>
+<a href="https://wa.me/8801745555453" class="bg-primary-container text-on-primary-container px-10 py-5 rounded-xl font-bold text-xl shadow-2xl button-settle inline-block text-center hover:scale-105 transition-transform">মেন্টর বা শিক্ষকের সাথে কথা বলুন</a>
 </div>
 </div>
 </section>

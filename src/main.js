@@ -1,7 +1,59 @@
-import { db } from './lib/firebase.js';
-import { collection, getDocs, getDoc, doc, query, orderBy } from 'firebase/firestore';
+import { db, auth } from './lib/firebase.js';
+import { collection, getDocs, getDoc, doc, query, orderBy, addDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Check if user is logged in
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const adminRef = doc(db, 'admin_users', user.uid);
+            const adminSnap = await getDoc(adminRef);
+            if (!adminSnap.exists()) {
+                // Not an admin, meaning it's a student
+                const formSec = document.getElementById('testimonial-form-section');
+                if(formSec) formSec.classList.remove('hidden');
+                
+                // Add submit event listener
+                const testiForm = document.getElementById('student-testimonial-form');
+                if (testiForm) {
+                    testiForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const name = document.getElementById('testi-name').value;
+                        const review = document.getElementById('testi-review').value;
+                        const msg = document.getElementById('testi-msg');
+                        const sBtn = testiForm.querySelector('button[type="submit"]');
+                        
+                        msg.textContent = "সাবমিট হচ্ছে...";
+                        msg.className = "mt-4 text-sm font-bold text-amber-500";
+                        sBtn.disabled = true;
+                        
+                        try {
+                            await addDoc(collection(db, "testimonials"), {
+                                name,
+                                review,
+                                role: 'Student',
+                                image_url: '',
+                                order: 99
+                            });
+                            msg.textContent = "ধন্যবাদ! আপনার মতামত সফলভাবে যুক্ত হয়েছে।";
+                            msg.className = "mt-4 text-sm font-bold text-green-600";
+                            testiForm.reset();
+                            
+                            // Immediately fetch to show new testimonial
+                            setTimeout(() => { fetchAndRenderTestimonials(); }, 1000);
+                        } catch (err) {
+                            console.error(err);
+                            msg.textContent = "মতামত সাবমিট করতে সমস্যা হয়েছে।";
+                            msg.className = "mt-4 text-sm font-bold text-red-500";
+                        } finally {
+                            sBtn.disabled = false;
+                        }
+                    });
+                }
+            }
+        }
+    });
+
     await fetchWebsiteSettings();
     await fetchAndRenderCourses();
     await fetchAndRenderBlogs();
@@ -82,8 +134,8 @@ async function fetchAndRenderCourses() {
             navDropdown.innerHTML = '';
             courses.forEach(course => {
                 navDropdown.innerHTML += `
-                    <a href="#curr-tab-content" onclick="window.switchCurrTab('\${course.id}')" class="px-5 py-3 hover:bg-surface-container transition flex items-center gap-2 font-bold text-sm text-on-surface">
-                        <span class="material-symbols-outlined text-primary text-[18px]">play_lesson</span> \${course.title}
+                    <a href="#curr-tab-content" onclick="window.switchCurrTab('${course.id}')" class="px-5 py-3 hover:bg-surface-container transition flex items-center gap-2 font-bold text-sm text-on-surface">
+                        <span class="material-symbols-outlined text-primary text-[18px]">play_lesson</span> ${course.title}
                     </a>
                 `;
             });
