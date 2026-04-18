@@ -6,6 +6,13 @@ import { runMigration } from './lib/migration.js';
 
 const ADMIN_EMAIL = 'taniloy334@gmail.com';
 
+const withTimeout = (promise, ms, errorMessage) => {
+    return Promise.race([
+        promise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error(errorMessage)), ms))
+    ]);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Auth Protection
     onAuthStateChanged(auth, async (user) => {
@@ -122,8 +129,13 @@ async function handleStatusChange(docId, newStatus, btn) {
 async function uploadImage(file, folderPath) {
     if (!file) return null;
     const storageRef = ref(storage, `${folderPath}/${Date.now()}_${file.name}`);
-    // Using uploadBytes directly returns a promise that resolves or rejects properly
-    const snapshot = await uploadBytes(storageRef, file);
+    
+    // Add a 15-second timeout. Firebase Storage SDK will hang indefinitely on invalid buckets.
+    const snapshot = await withTimeout(
+        uploadBytes(storageRef, file), 
+        15000, 
+        "Image Upload Timeout. Please check your Firebase Storage rules and Environment Variables (.env) on Vercel."
+    );
     return await getDownloadURL(snapshot.ref);
 }
 
@@ -164,11 +176,15 @@ async function handleSettingsSubmit(e) {
             img.classList.remove('hidden');
         }
 
-        await setDoc(doc(db, "website_settings", "global"), updateData, { merge: true });
+        await withTimeout(
+            setDoc(doc(db, "website_settings", "global"), updateData, { merge: true }),
+            10000,
+            "Database Timeout: Could not connect to Firebase Firestore. Check permissions and Vercel Environment Variables."
+        );
         alert("Settings Saved!");
     } catch(err) { 
         console.error(err); 
-        alert("Error saving settings. Contact administrator or check permissions.");
+        alert("Upload Error: " + (err.message || "Unknown error occurred."));
     }
     
     btn.textContent = "সেভ পরিবর্তন";
@@ -321,11 +337,18 @@ async function handleCourseSubmit(e) {
             updateData.image_url = await uploadImage(fileInput, `course_images/${docId}`);
         }
 
-        await setDoc(doc(db, "courses", docId), updateData, { merge: true });
+        await withTimeout(
+            setDoc(doc(db, "courses", docId), updateData, { merge: true }),
+            10000,
+            "Database Timeout: Could not connect to Firebase Firestore."
+        );
         
         closeCourseModal();
         fetchCourses();
-    } catch(err) { console.error(err); alert("Error saving course!"); }
+    } catch(err) { 
+        console.error(err); 
+        alert("Error saving course: " + (err.message || "Unknown error")); 
+    }
     
     btn.textContent = "সেভ করুন"; btn.disabled = false;
 }
