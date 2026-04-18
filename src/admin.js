@@ -1,7 +1,6 @@
-import { auth, db, storage } from './lib/firebase.js';
+import { auth, db } from './lib/firebase.js';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, getDocs, getDoc, query, orderBy, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { runMigration } from './lib/migration.js';
 
 const ADMIN_EMAIL = 'taniloy334@gmail.com';
@@ -147,11 +146,8 @@ async function fetchSettings() {
         const d = docSnap.data();
         document.getElementById('setting-hero-title').value = d.hero_title || '';
         document.getElementById('setting-hero-subtitle').value = d.hero_subtitle || '';
-        if (d.hero_image_url) {
-            const img = document.getElementById('setting-hero-preview');
-            img.src = d.hero_image_url;
-            img.classList.remove('hidden');
-        }
+        document.getElementById('setting-hero-image-url').value = d.hero_image_url || '';
+        // No image preview handling here since we use URL input directly
     }
 }
 
@@ -164,17 +160,13 @@ async function handleSettingsSubmit(e) {
     try {
         const title = document.getElementById('setting-hero-title').value;
         const sub = document.getElementById('setting-hero-subtitle').value;
-        const fileInput = document.getElementById('setting-hero-image').files[0];
+        const imgUrl = document.getElementById('setting-hero-image-url').value;
         
-        let updateData = { hero_title: title, hero_subtitle: sub };
-        
-        if (fileInput) {
-            const url = await uploadImage(fileInput, 'hero_images');
-            updateData.hero_image_url = url;
-            const img = document.getElementById('setting-hero-preview');
-            img.src = url;
-            img.classList.remove('hidden');
-        }
+        let updateData = { 
+            hero_title: title, 
+            hero_subtitle: sub,
+            hero_image_url: imgUrl 
+        };
 
         await withTimeout(
             setDoc(doc(db, "website_settings", "global"), updateData, { merge: true }),
@@ -255,13 +247,7 @@ function openCourseModal(course = null) {
             document.getElementById('course-feat-3').value = course.features[2] || '';
         }
 
-        if (course.image_url) {
-            const pre = document.getElementById('course-image-preview');
-            pre.src = course.image_url;
-            pre.classList.remove('hidden');
-        } else {
-            document.getElementById('course-image-preview').classList.add('hidden');
-        }
+        document.getElementById('course-image-url').value = course.image_url || '';
 
         if(course.modules) {
             course.modules.forEach(m => addModuleRow(m.title, m.description, m.videos.join('\n')));
@@ -270,7 +256,7 @@ function openCourseModal(course = null) {
         document.getElementById('modal-title').textContent = "নতুন কোর্স";
         document.getElementById('course-form').reset();
         document.getElementById('course-id').value = '';
-        document.getElementById('course-image-preview').classList.add('hidden');
+        document.getElementById('course-image-url').value = '';
         addModuleRow(); // 1 empty module
     }
 }
@@ -332,10 +318,8 @@ async function handleCourseSubmit(e) {
         // Add ID field inside document
         if(!idInput) updateData.id = docId; else updateData.id = idInput;
 
-        const fileInput = document.getElementById('course-image').files[0];
-        if (fileInput) {
-            updateData.image_url = await uploadImage(fileInput, `course_images/${docId}`);
-        }
+        const imgUrl = document.getElementById('course-image-url').value;
+        if(imgUrl) updateData.image_url = imgUrl;
 
         await withTimeout(
             setDoc(doc(db, "courses", docId), updateData, { merge: true }),
