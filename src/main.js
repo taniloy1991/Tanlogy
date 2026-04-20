@@ -165,7 +165,6 @@ function renderCourseCards(courses) {
         }
 
         const imageHtml = course.image_url ? `<img src="${course.image_url}" class="w-full h-40 object-cover rounded-xl mb-4" alt="${course.title}">` : `<div class="w-full h-40 bg-gray-200 rounded-xl mb-4 animate-pulse flex items-center justify-center text-gray-500"><span class="material-symbols-outlined text-4xl">image</span></div>`;
-        const themeStr = course.button_theme || 'bg-primary text-on-primary';
 
         const cardHtml = `
             <div class="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full relative overflow-hidden group">
@@ -177,7 +176,7 @@ function renderCourseCards(courses) {
                         ${featuresHtml}
                     </ul>
                 </div>
-                <a href="checkout.html" onclick="localStorage.setItem('selectedCourse', '${course.title}')" class="w-full py-4 ${themeStr} rounded-xl font-bold text-center button-settle transition-all relative z-10 shadow-md hover:scale-[1.02]">Enroll Now</a>
+                <a href="checkout.html" onclick="localStorage.setItem('selectedCourse', '${course.title}')" class="w-full py-4 bg-surface-container text-on-surface hover:bg-surface-container-high rounded-xl font-bold text-center button-settle transition-all relative z-10 shadow-sm hover:scale-[1.02]">Enroll Now</a>
             </div>
         `;
         
