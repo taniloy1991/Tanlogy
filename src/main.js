@@ -119,14 +119,16 @@ async function fetchWebsiteSettings() {
 }
 
 // ------------- Courses & Curriculum -------------
+let allCoursesData = [];
+
 async function fetchAndRenderCourses() {
     try {
         const q = query(collection(db, "courses"), orderBy("order", "asc"));
         const snap = await getDocs(q);
         const courses = snap.docs.map(doc => ({id: doc.id, ...doc.data()}));
         
+        allCoursesData = courses;
         renderCourseCards(courses);
-        renderCurriculum(courses);
         
         // Populate navbar dropdown
         const navDropdown = document.getElementById('nav-courses-dropdown');
@@ -134,7 +136,7 @@ async function fetchAndRenderCourses() {
             navDropdown.innerHTML = '';
             courses.forEach(course => {
                 navDropdown.innerHTML += `
-                    <a href="#curr-tab-content" onclick="window.switchCurrTab('${course.id}')" class="px-5 py-3 hover:bg-surface-container transition flex items-center gap-2 font-bold text-sm text-on-surface">
+                    <a href="javascript:void(0)" onclick="openCurriculum('${course.id}')" class="px-5 py-3 hover:bg-surface-container transition flex items-center gap-2 font-bold text-sm text-on-surface">
                         <span class="material-symbols-outlined text-primary text-[18px]">play_lesson</span> ${course.title}
                     </a>
                 `;
@@ -167,7 +169,7 @@ function renderCourseCards(courses) {
         const imageHtml = course.image_url ? `<img src="${course.image_url}" class="w-full h-40 object-cover rounded-xl mb-4" alt="${course.title}">` : `<div class="w-full h-40 bg-gray-200 rounded-xl mb-4 animate-pulse flex items-center justify-center text-gray-500"><span class="material-symbols-outlined text-4xl">image</span></div>`;
 
         const cardHtml = `
-            <div class="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full relative overflow-hidden group">
+            <div onclick="openCurriculum('${course.id}')" class="cursor-pointer bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full relative overflow-hidden group">
                 <div class="mb-6 flex-grow relative z-10">
                     ${imageHtml}
                     <h3 class="text-2xl font-bold mb-3 font-headline text-on-surface">${course.title}</h3>
@@ -176,7 +178,7 @@ function renderCourseCards(courses) {
                         ${featuresHtml}
                     </ul>
                 </div>
-                <a href="checkout.html" onclick="localStorage.setItem('selectedCourse', '${course.title}')" class="w-full py-4 bg-surface-container text-on-surface hover:bg-surface-container-high rounded-xl font-bold text-center button-settle transition-all relative z-10 shadow-sm hover:scale-[1.02]">Enroll Now</a>
+                <a href="checkout.html" onclick="event.stopPropagation(); localStorage.setItem('selectedCourse', '${course.title}')" class="w-full py-4 bg-surface-container text-on-surface hover:bg-surface-container-high rounded-xl font-bold text-center button-settle transition-all relative z-10 shadow-sm hover:scale-[1.02]">Enroll Now</a>
             </div>
         `;
         
@@ -184,56 +186,54 @@ function renderCourseCards(courses) {
     });
 }
 
-function renderCurriculum(courses) {
+window.openCurriculum = (courseId) => {
+    const course = allCoursesData.find(c => c.id === courseId);
+    if (!course) return;
+
+    const modal = document.getElementById('curriculum-modal');
+    if (!modal) return;
+    
+    const titleEl = document.getElementById('curriculum-modal-title');
     const contentContainer = document.getElementById('curriculum-content-container');
     
+    titleEl.textContent = course.title + ' - সিলেবাস';
     contentContainer.innerHTML = '';
 
-    courses.forEach((course) => {
-        let modulesHtml = '';
+    let modulesHtml = '';
+    if(course.modules && Array.isArray(course.modules)) {
+        course.modules.forEach((mod, mIndex) => {
+            let videosHtml = '';
+            if(mod.videos && Array.isArray(mod.videos)) {
+                mod.videos.forEach(v => {
+                    videosHtml += `<li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>${v}</li>`;
+                });
+            }
 
-        if(course.modules && Array.isArray(course.modules)) {
-            course.modules.forEach((mod, mIndex) => {
-                let videosHtml = '';
-                if(mod.videos && Array.isArray(mod.videos)) {
-                    mod.videos.forEach(v => {
-                        videosHtml += `<li class="flex gap-3 text-sm"><span class="material-symbols-outlined text-base text-primary">play_circle</span>${v}</li>`;
-                    });
-                }
-
-                modulesHtml += `
-                    <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden" open>
-                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
-                            <div class="flex items-center gap-4">
-                                <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">${mIndex + 1}</span>
-                                <span>${mod.title}</span>
-                            </div>
-                            <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
-                        </summary>
-                        <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
-                            ${mod.description ? `<p class="mb-3 text-sm italic text-primary-fixed-variant">${mod.description}</p>` : ''}
-                            <ul class="space-y-3">
-                                ${videosHtml}
-                            </ul>
+            modulesHtml += `
+                <details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden" ${mIndex === 0 ? 'open' : ''}>
+                    <summary class="flex justify-between items-center cursor-pointer p-6 list-none font-bold text-lg select-none">
+                        <div class="flex items-center gap-4">
+                            <span class="text-primary bg-primary/10 w-10 h-10 flex flex-col justify-center items-center rounded-lg">${mIndex + 1}</span>
+                            <span>${mod.title}</span>
                         </div>
-                    </details>
-                `;
-            });
-        } else {
-            modulesHtml = `<p class="text-gray-500 text-center py-4">No modules found for this course.</p>`;
-        }
+                        <span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300">expand_more</span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-2 text-on-surface-variant border-t border-outline-variant/10 ml-[56px]">
+                        ${mod.description ? `<p class="mb-3 text-sm italic text-primary-fixed-variant">${mod.description}</p>` : ''}
+                        <ul class="space-y-3">
+                            ${videosHtml}
+                        </ul>
+                    </div>
+                </details>
+            `;
+        });
+    } else {
+        modulesHtml = `<p class="text-gray-500 text-center py-4">No modules found for this course.</p>`;
+    }
 
-        const courseHtml = `
-            <div class="mb-12">
-                <h3 class="text-3xl font-bold mb-6 text-on-surface font-headline border-b border-outline-variant/20 pb-4">${course.title}</h3>
-                <div class="space-y-4">
-                    ${modulesHtml}
-                </div>
-            </div>
-        `;
-        contentContainer.innerHTML += courseHtml;
-    });
-}
+    contentContainer.innerHTML = `<div class="space-y-4">${modulesHtml}</div>`;
+    modal.classList.remove('hidden');
+};
 
 // ------------- Testimonials -------------
 async function fetchAndRenderTestimonials() {
